@@ -5,6 +5,13 @@ Gets all commands that are installed on the computer.
 Get-Command -Noun Computer # all commands that contain the noun "computer"
 ```
 
+## Get-ChildItem
+Gets the items and child items in one or more specified locations.
+```powershell
+Get-ChildItem -path 'C:\Program Files' -Recurse -File -Force -Include *.exe -Exclude w*
+Get-ChildItem -Path C:\Test -File -Recurse | Remove-Item 
+```
+
 ## Get-Computerinfo
 Gets a consolidated object of system and operating system properties.
 
