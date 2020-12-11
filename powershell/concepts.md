@@ -186,9 +186,17 @@ A PS-Drive is a location to save data. This could be
 * certificate drive Cert:
 * environment variables (to keep scripts neutral)
 
+```powershell
+Get-PSDrive
+```
 Add a new PS-Drive:
 ```powershell
 New-PSDrive -Name X -PSProvider FileSystem -Root \\dc01\Share -Persist
+```
+
+Change into a PS-Drive:
+```powershell
+cd hklm:
 ```
 
 ## Functions & Modules
@@ -205,9 +213,9 @@ Use the following paths:
 `Get-Module` shows all loaded modules.
 
 * Script Modules have the file extension .psm1.
-* Binary Modules are typically written in C#.
-* Manifest Files are a description about a module.
-* Dynamic Modules are not saved in a file.
+* Binary Modules are typically written in C#
+* Manifest Files are a description about a module
+* Dynamic Modules are not saved in a file (created with `New-Module`)
 
 See all commands of the module Bitlocker:
 ```powershell
@@ -218,7 +226,7 @@ Every Cmdlet is part of a module.
 
 ### Writing Skript Modules
 1. Add a module file, e.g. `Get-Time.psm1`
-2. Put the file into a module directory which has the same name as the script and put it into the standard module directory, e.g. `Get-Time`
+2. Put the file into a module directory which has the same name as the script and put it into the standard module directory (e.g. C:\Program Files\WindowsPowerShell\Modules\Get-Time)
 3. Add a manifest file (optional)
 
 ### Writing Functions
