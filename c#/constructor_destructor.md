@@ -2,7 +2,8 @@
 
 # Destructor
 
-- called before the Garbage Collection releases an object
+* called before the Garbage Collection releases an object
+* not defined when memory cleanup is performed
 
 ```csharp
 public class A {
@@ -13,7 +14,6 @@ public class A {
 ```
 
 ## IDisposable
-
 - an interface for explicit resource releases
 
 ```csharp
