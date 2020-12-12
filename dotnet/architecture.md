@@ -1,8 +1,8 @@
 # .NET Architecture
 
-Last .NET (Full) Framework Version: 4.8 (04/2019)
+Latest .NET (Full) Framework Version: 4.8 (04/2019)
 
-Last .NET Core Version: 3.1 (LTS, 12/2019)
+Latest .NET Core Version: 3.1 (LTS, 12/2019)
 
 Current .NET Version: 5.0 (11/2020) using CoreCLR
 
