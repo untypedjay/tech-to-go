@@ -17,3 +17,5 @@ Circle c = new Circle();
 c.Radius = 5.0; // setter called
 double r = c.Radius; // getter called
 ```
+## Uniform Access Principle
+* access to a data component or to a property is exactly the same
