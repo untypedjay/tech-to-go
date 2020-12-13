@@ -36,6 +36,12 @@ Reads a line of input from the console.
 $Age = Read-Host "Please enter your age"
 ```
 
+## Set-Alias
+Creates or changes an alias for a cmdlet or other command in the current PowerShell session.
+```powershell
+Set-Alias -Name list -Value Get-ChildItem
+```
+
 ## Set-ExecutionPolicy
 Sets the PowerShell execution policies for Windows computers.
 ```powershell
