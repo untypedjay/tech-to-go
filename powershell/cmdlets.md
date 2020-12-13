@@ -1,4 +1,10 @@
 # Cmdlets
+## Get-ADUser
+Gets one or more Active Directory users.
+```powershell
+Get-ADUser -Filter 'Name -like "*SvcAccount"' | Format-Table Name,SamAccountName -A
+```
+
 ## Get-Command
 Gets all commands that are installed on the computer.
 ```powershell
