@@ -124,3 +124,15 @@ public partial class HelloWorld : Window {
   }
 }
 ```
+
+## WPF Base Classes
+![WPF Base Classes](./images/wpf-base-classes.png)
+
+### DispatcherObject
+* all WPF classes are not thread safe
+* the dispatcher which is associated with the `DispatcherObject` puts every method call into an event queue, which will be processed by the UI thread
+
+### DependencyObject
+* enables dependency properties
+* dependency properties have additional characteristics: default value, inheritance in control element tree, event firing when value changes
+* dependency properties are used for styling, databinding and animation
