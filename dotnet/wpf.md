@@ -8,7 +8,7 @@ A WPF applications needs the following libraries:
 
 ## XAML
 Declarative Programming: User Interfaces can be written in XAML (eXtensible Application Markup Language)
-```xml
+```xaml
 <Window x:Class="XamlExperiments.SimpleDialog"
   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
   xmlns:x="http://.../xaml"
@@ -52,7 +52,7 @@ Declarative Programming: User Interfaces can be written in XAML (eXtensible Appl
 
 ### Property Elements
 Property elements can hold complex children types:
-```xml
+```xaml
 <Button>
   <Button.Content>
     <Image Source="smiley.jpg" Height="50" Width="80"/>
@@ -96,7 +96,7 @@ public class HelloWindow : Window {
 
 ### Hello World in XAML
 Resource definitions for the global application:
-```xml
+```xaml
 <Application
   xmlns=" http://schemas.microsoft.com/winfx/2006/xaml/presentation"
   StartupUri="HelloWindow.xaml"
@@ -104,7 +104,7 @@ Resource definitions for the global application:
 ```
 
 Window description:
-```xml
+```xaml
 <Window
   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -136,3 +136,53 @@ public partial class HelloWorld : Window {
 * enables dependency properties
 * dependency properties have additional characteristics: default value, inheritance in control element tree, event firing when value changes
 * dependency properties are used for styling, databinding and animation
+
+## WPF Controls
+### `<Button>`
+```xaml
+<Button
+  x:Name="submitButton"
+  Grid.Column="1"
+  Grid.Row="3"
+  Grid.ColumnSpan="2"
+  Margin="10"
+  Click="submitButton_Click"
+>
+  Click Me
+</Button>
+```
+
+### `<Grid>`
+* can hold multiple elements
+```xaml
+<Grid>
+  <Grid.ColumnDefinitions>
+    <ColumnDefinition Width="20"/>
+    <ColumnDefinition Width="auto"/>
+    <ColumnDefinition Width="*"/>
+    <ColumnDefinition Width="20"/>
+  </Grid.ColumnDefinitions>
+  <Grid.RowDefinitions>
+    <RowDefinition Height="20"/>
+    <RowDefinition Height="auto"/>
+    <RowDefinition Height="*"/>
+    <RowDefinition Height="20"/>
+  </Grid.RowDefinitions>
+  ...
+</Grid>
+```
+
+### `<TextBlock>`
+* renders simple text
+* often used as a label
+```xaml
+<TextBlock
+  Grid.Column="1"
+  Grid.Row="1"
+  FontSize="36"
+  Grid.ColumnSpan="3"
+  Margin="0,0,0,20"
+>
+  Hello World
+</TextBlock>
+```
