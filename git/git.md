@@ -7,7 +7,7 @@ Git is a distributed **version-control system** for tracking changes in source c
 
 ## Local Version Control Systems
 
-![Local Version Control](local.png)
+![Local Version Control](./images/local.png)
 
 ## Centralized Version Control Systems
 
@@ -16,14 +16,14 @@ Git is a distributed **version-control system** for tracking changes in source c
 - (+) full admin control
 - (-) single point of failure
 
-![Centralized Version Control](centralized.png)
+![Centralized Version Control](./images/centralized.png)
 
 ## Distributed Version Control Systems
 
 - examples: Git, Mercurial, Bazaar
 - full repository mirrowing
 
-![Distributed Version Control](distributed.png)
+![Distributed Version Control](./images/distributed.png)
 
 ## Git Overview
 * no deltas (differences) but snapshots instead that link to the original files
