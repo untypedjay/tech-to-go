@@ -152,28 +152,13 @@ public partial class HelloWorld : Window {
 </Button>
 ```
 
-### `<Grid>`
-* can hold multiple elements
-```xaml
-<Grid>
-  <Grid.ColumnDefinitions>
-    <ColumnDefinition Width="20"/>
-    <ColumnDefinition Width="auto"/>
-    <ColumnDefinition Width="*"/>
-    <ColumnDefinition Width="20"/>
-  </Grid.ColumnDefinitions>
-  <Grid.RowDefinitions>
-    <RowDefinition Height="20"/>
-    <RowDefinition Height="auto"/>
-    <RowDefinition Height="*"/>
-    <RowDefinition Height="20"/>
-  </Grid.RowDefinitions>
-  ...
-</Grid>
-```
+### `CheckBox`
+
+### `Image`
+* display an image
 
 ### `<TextBlock>`
-* renders simple text
+* renders simple text (strings only)
 * often used as a label
 ```xaml
 <TextBlock
@@ -186,3 +171,36 @@ public partial class HelloWorld : Window {
   Hello World
 </TextBlock>
 ```
+
+### `TextBox`
+* lets the user input text
+```xaml
+<TextBox
+  AcceptsReturn="True"
+  TextWrapping="Wrap"
+  SpellCheck.IsEnabled="True"
+  Language="en-US"
+  SelectionChanged="TextBox_SelectionChanged"
+/>
+```
+```csharp
+private void TextBox_SelectionChanged(object sender, RoutedEventArgs e)
+{
+  ...
+}
+```
+
+## WPF Panels
+### `DockPanel`
+* docks child controls to the top, bottom, left or right
+
+### `Grid`
+
+### `StackPanel`
+* stacks up child controls next to each other without wrapping into the next line
+
+### `UniformGrid`
+* like the `Grid` but all rows and columns have the same size
+
+### `WrapPanel`
+* child control next to each other until there is no more space
