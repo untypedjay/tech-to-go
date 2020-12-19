@@ -138,7 +138,7 @@ public partial class HelloWorld : Window {
 * dependency properties are used for styling, databinding and animation
 
 ## WPF Controls
-### `<Button>`
+### `Button`
 ```xaml
 <Button
   x:Name="submitButton"
@@ -154,10 +154,20 @@ public partial class HelloWorld : Window {
 
 ### `CheckBox`
 
+### `ComboBox`
+* displays a dropdown list
+```xaml
+<ComboBox>
+  <ComboBoxItem>ComboBox Item #1</ComboBoxItem>
+  <ComboBoxItem IsSelected="True">ComboBox Item #2</ComboBoxItem>
+  <ComboBoxItem>ComboBox Item #3</ComboBoxItem>
+</ComboBox>
+```
+
 ### `Image`
 * display an image
 
-### `<TextBlock>`
+### `TextBlock`
 * renders simple text (strings only)
 * often used as a label
 ```xaml
