@@ -1,7 +1,7 @@
 # Basics
 
 # How to run your JavaScript Code
-
+JavaScript can run on every device that has a JavaScript engine.
 - in the Chrome Developer Tools Console
 - HTML inline with the `<script>` tag (usually before the closing body tag)
 - in an external file with `<script src="./some.js"></script>`
