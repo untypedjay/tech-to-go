@@ -87,11 +87,9 @@ Variables need to be named with letters underscores and dollar signs.
 # Datatypes
 
 ## Overview
-
-Mnemonic: SNOB'N'US
-
 - String
 - Number
+- BigInt
 - Object (special, because the only one that is not a primitive)
 - Boolean
 - Null
@@ -203,9 +201,9 @@ const age = 100.5;
 window.location = `https://${0.1 + 0.2}.com`;
 10 ** 2; // "to the power of"
 1000 ** 200; // -> Infinity
-typeof Infinity; // -> "number"
+typeof Infinity; // -> "number", greater than any number, e.g. 1 / 0
 10 / 'dog'; // -> NaN
-typeof NaN; // -> "number"
+typeof NaN; // -> "number", result of a computational error
 ```
 
 Always store prices in whole numbers! Store them for example in cents.
@@ -231,6 +229,15 @@ const dadGets = smarties % kids;
 console.log(`Each kid gets ${eachKidGets}`);
 ```
 
+## BigInt
+The number type cannot hold larger integer values than 9007199254740991.
+For certain purposes e.g. for cryptography it is useful to have number that are bigger than that.
+`BigInt` can hold integers of arbitrary length.
+```js
+// the "n" at the end means it's a BigInt
+const bigInt = 1234567890123456789012345678901234567890n;
+```
+
 ## Object
 
 Everything in JavaScript is an object. It's used to group things together.
@@ -251,11 +258,13 @@ Variables that have nothing in it. It has to be set explicitly.
 
 ```js
 const somethingNull = null;
+typeof null; // -> "object", which is an error and kept for compatibility reasons
 ```
 
 ## Undefined
 
 Variables that have no value set yet.
+Variables should not explicitly assigned to `undefined`.
 
 ```js
 let dog;
@@ -280,3 +289,4 @@ let isDrawing = false;
 ```
 
 ## Symbol
+This type is used to create unique identifiers for objects.
