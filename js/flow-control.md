@@ -62,3 +62,10 @@ isAdmin ? showAdminBar() : null;
 ```js
 isAdmin && showAdminBar();
 ```
+
+## Nullish Coalescing Operator
+Returns the first argument if it is not `null` or `undefined`.
+```js
+let user;
+alert(user ?? 'Anonymous'); // Anonymous
+```
