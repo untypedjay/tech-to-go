@@ -66,6 +66,13 @@ const todoJSON = JSON.stringify(todos);
 console.log(todoJSON);
 ```
 
+## Computed Properties
+```js
+let bag = {
+  [fruit]: 5
+};
+```
+
 # Object Reference vs. Values
 
 Objects and Arrays are pointed to references!
