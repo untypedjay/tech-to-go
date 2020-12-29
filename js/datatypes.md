@@ -204,3 +204,36 @@ let isDrawing = false;
 
 ## Symbol
 This type is used to create unique identifiers for objects.
+Object property keys may be eigher a string or a symbol.
+```js
+let id1 = Symbol();
+let id2 = Symbol('id'); // add a description
+alert(id2.description); -> id
+```
+Symbols cannot be auto-converted to a string. If you try to `alert` a symbol it will throw an error. It only works using the `.toString()` method.
+
+Symbols allow us to create hidden properties of an object, that no other part of code can accidentally access or overwrite.
+```js
+let user = {
+	name: 'John'
+};
+
+let id = Symbol('id');
+user[id] = 1;
+alert(user[id]);
+```
+That is safer than an id property because third-party code won't notice the symbol and can even add their own.
+There will be no conflict because symbols are always different, even if they have the same name.
+
+### Symbols in an object literal
+```js
+let id = Symbol('id');
+
+let user = {
+	name: 'John',
+	[id]: 123
+};
+```
+
+Symbols are skipped by `for...in` and are ignored by `Object.keys(user)`.
+`Object.assign()` copies both string and symbol properties.
