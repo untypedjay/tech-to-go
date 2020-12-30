@@ -103,6 +103,15 @@ s.lastIndexOf("l");
 
 ```js
 const age = 100.5;
+const billion = 1e9;
+const ms = 1e-6;
+const hex = 0xff; // 255
+const bin = 0b11111111; // 255
+const oct = 0o377; // 255
+alert(bin == oct); // true
+alert(isFinite('15')); // true
+alert(isFinite('str')); // false
+alert(isFinite(Infinity)); // false
 ```
 
 ### Math
@@ -129,6 +138,7 @@ Math.round(20.5); // -> 21
 Math.round(20.2); // -> 20
 Math.floor(20.9); // -> 20
 Math.ceil(20.1); // -> 21
+Math.trunc(3.1); // -> 3.1
 Math.random() // -> random number between 0 and 1
 Math.max(10, 12); // -> 12
 ```
