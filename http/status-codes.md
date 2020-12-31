@@ -60,7 +60,7 @@
 * **451 Unavailable For Legal Reasons**: server received legal demand to deny access
 
 ## 5xx server errors
-* **500 Interanal Server Error**: generic error message
+* **500 Internal Server Error**: generic error message
 * **501 Not Implemented**: server lacks ability to fulfill the request
 * **502 Bad Gateway**: server was acting as a gateway and received an invalid response
 * **503 Service Unavailable**: server is overloaded or down for maintenance, usually temporary
