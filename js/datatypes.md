@@ -90,6 +90,7 @@ const hello = `My name is ${name} and I am ${age}`;
 console.log(hello);
 
 const s = 'Hello World';
+console.log(s[0]);
 console.log(s.length);
 console.log(s.toUpperCase());
 console.log(s.toLowerCase());
