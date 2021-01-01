@@ -31,7 +31,7 @@ let alternativeWay = (message as string).endsWith('c');
 ## Custom Types
 ```ts
 interface Point {
-  x: number;
+  x: number,
   y: number
 }
 
