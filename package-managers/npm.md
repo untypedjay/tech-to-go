@@ -4,7 +4,7 @@
 
 Find modules on [npmjs.com](https://www.npmjs.com/)
 
-# package.json
+## package.json
 
 - Manifest file with app info
 - lists dependencies
@@ -13,9 +13,9 @@ Find modules on [npmjs.com](https://www.npmjs.com/)
 
 The file `package-lock.json` ensures that installations remain identical and reproducible throughout their entire dependency tree, across users, such as teams members working together, and across systems.
 
-# Commands
+## Commands
 
-```bash
+```zsh
 # see the version of npm
 npm -v
 # create package.json
@@ -63,11 +63,10 @@ npm list
 npm list -depth 1
 ```
 
-# Versions
-
+## Versions
 ```json
 "lodash": "^4.17.4" // update to the latest minor version
-"lodash": "^4.17.4" // update to the latest patch version
+"lodash": "~4.17.4" // update to the latest patch version
 "lodash": "4.17.4" // install exact this version
 "lodash": "*" // update to the latest major version
 ```
