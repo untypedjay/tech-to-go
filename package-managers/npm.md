@@ -71,7 +71,7 @@ npm list -depth 1
 "lodash": "*" // update to the latest major version
 ```
 
-# Scripts
+## Scripts
 
 ```json
 "scripts": {
@@ -80,3 +80,6 @@ npm list -depth 1
 ```
 
 The command `npm start` will then execute `node start.js`.
+
+## npx
+`npx` lets you run binaries without installing them.
