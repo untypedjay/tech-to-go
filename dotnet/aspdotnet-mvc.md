@@ -1,9 +1,25 @@
 # ASP.NET MVC
 
+## Directory Structure
+* wwwroot: root directory of web server
+* ClientApp: single page web application
+* Controllers/Pages/Views: server side web application
+* Startup.cs: configuration of app components and middleware
+* Program.cs: host configuration
+
 ## Controllers
 ```cs
 public class MoviesController : Controller
 {
+  private readonly IMovieLogic movies = new MovieLogic();
+  
+  // GET: movies
+  public ActionResult Index()
+  {
+    var model = movies.FindAll().Select(movie => new MovieModel(movie));
+    return View("Index", model);
+  }
+  
   // GET: movies/random
   public ActionResult Random()
   {
@@ -46,7 +62,7 @@ public class MoviesController : Controller
 |EmptyResult|-|
 
 ## Views
-```cs
+```cshtml
 @model Vidly.Models.Movie
 @{
   ViewBag.Title = "Random";
@@ -54,4 +70,28 @@ public class MoviesController : Controller
 }
 
 <h2>@Model.Name</h2>
+```
+```cshtml
+@model IEnumerable
+<PersonModel
+>
+<html>
+<body>
+  @if (Model.Any()) {
+    <table border="1">
+    <tr>…</tr> 
+    @foreach (PersonModel p in Model) {
+      <tr>
+        <td>@p.FirstName</td>
+        <td>@p.LastName</td>
+        <td>@p.Email</td>
+      </tr>
+    }
+    </table>
+  }
+  @else {
+    <p>No persons in list.</p>
+  }
+</body>
+</html>
 ```
