@@ -50,6 +50,33 @@ Declarative Programming: User Interfaces can be written in XAML (eXtensible Appl
 </Window>
 ```
 
+```xaml
+<DataTemplate DataType="{x:Type model:Message}">
+    <DockPanel LastChildFill="True" Margin="0,0,0,20">
+        <Image DockPanel.Dock="Left"
+               Width="50"
+               Height="50"
+               VerticalAlignment="Top"
+               Margin="0,0,5,0"
+               Source="{Binding TODO}"
+        />
+
+        <StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
+            <TextBlock Text="{Binding User.Username}" FontWeight="Bold" />
+
+            <TextBlock Text="{Binding Timestamp, StringFormat=g}"
+           FontSize="10" Foreground="Gray" VerticalAlignment="Center" Margin="5,0,0,0" />
+
+        </StackPanel>
+
+        <TextBlock Text="{Binding Text}"
+                   VerticalAlignment="Top"
+                   TextWrapping="Wrap"
+        />
+    </DockPanel>
+</DataTemplate>
+```
+
 ### Property Elements
 Property elements can hold complex children types:
 ```xaml
@@ -122,6 +149,87 @@ public partial class HelloWorld : Window {
   private void OnClick(object sender, RoutedEventArgs e) {
     this.Close();
   }
+}
+```
+
+## MainWindow.xaml.cs
+```cs
+public partial class MainWindow : Window
+{
+    private MainViewModel mainViewModel;
+    public MainWindow()
+    {
+        InitializeComponent();
+
+        var currentUser = new User()
+        {
+            Username = "user",
+            ProfileUrl = "https://robohash.org/100.png?size=150x150"
+        };
+
+        mainViewModel = new MainViewModel(new SimulatedMessagingLogic(currentUser));
+        DataContext = mainViewModel;
+
+        Loaded += async (s, e) => await mainViewModel.InitializeAsync();
+    }
+}
+```
+
+## ViewModels
+```cs
+public class MainViewModel
+{
+    private IMessagingLogic messagingLogic;
+    private ChannelViewModel currentChannel;
+
+    public MainViewModel(IMessagingLogic messagingLogic)
+    {
+        this.messagingLogic = messagingLogic ?? throw new ArgumentNullException(nameof(messagingLogic));
+        CreateChannelViewModel = new CreateChannelViewModel(this.messagingLogic);
+    }
+
+    public ObservableCollection<ChannelViewModel> Channels { get; private set; } = new ObservableCollection<ChannelViewModel>();
+
+    public ChannelViewModel CurrentChannel
+    {
+        get => currentChannel;
+        set
+        {
+            currentChannel = value;
+            currentChannel.UnreadMessages = 0;
+        }
+    }
+
+    public CreateChannelViewModel CreateChannelViewModel { get; }
+
+    public async Task InitializeAsync()
+    {
+        var channels = await messagingLogic.GetChannelsAsync();
+        foreach (var channel in channels)
+        {
+            Channels.Add(new ChannelViewModel(channel, messagingLogic)); // calls property changed event
+        }
+
+        messagingLogic.MessageReceived += OnMessageReceived;
+
+        this.messagingLogic.ChannelCreated += OnChannelCreated;
+    }
+
+    private void OnMessageReceived(Message message)
+    {
+        var channel = Channels.First(c => c.Channel.Name == message.Channel.Name);
+        channel.Messages.Add(message);
+
+        if (channel != CurrentChannel)
+        {
+            channel.UnreadMessages++;
+        }
+    }
+
+    private void OnChannelCreated(Channel channel)
+    {
+        this.Channels.Add(new ChannelViewModel(channel, this.messagingLogic));
+    }
 }
 ```
 
@@ -205,6 +313,20 @@ private void TextBox_SelectionChanged(object sender, RoutedEventArgs e)
 * docks child controls to the top, bottom, left or right
 
 ### `Grid`
+```xaml
+<Grid>
+    <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="300"/>
+        <ColumnDefinition Width="*"/>
+    </Grid.ColumnDefinitions>
+
+    <Grid Grid.Column="0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        ...
+```
 
 ### `StackPanel`
 * stacks up child controls next to each other without wrapping into the next line
