@@ -47,6 +47,66 @@ public class MoviesController : Controller
   }
 }
 ```
+```cs
+public class ConverterController : Controller
+{
+    public ConverterController(ICurrencyCalculator currencyCalculator)
+    {
+        Logic = currencyCalculator;
+    }
+
+    private ICurrencyCalculator Logic { get; }
+
+    [HttpGet]
+    public async Task<IActionResult> Index()
+    {
+        IEnumerable<CurrencyData> currencyData = await GetDataForAllCurrencies();
+
+        var model = new ConverterViewModel
+        {
+            Currencies = ConvertCurrencyList(currencyData),
+            SourceCurrency = "EUR",
+            TargetCurrency = "USD"
+        };
+
+        return View(model);
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> Index(ConverterViewModel model)
+    {
+        var currencyData = await GetDataForAllCurrencies();
+        model.Currencies = ConvertCurrencyList(currencyData);
+
+        if (!ModelState.IsValid)
+        {
+            return View(model);
+        }
+
+        ModelState.Clear();
+
+        model.TargetValue = model.SourceValue * await Logic.RateOfExchangeAsnyc(model.SourceCurrency, model.TargetCurrency);
+        return View(model);
+    }
+
+    private async Task<IEnumerable<CurrencyData>> GetDataForAllCurrencies()
+    {
+        var currencies = (await Logic.GetCurrenciesAsync())
+                .Select(async symbol => await Logic.GetCurrencyDataAsync(symbol));
+        return await Task.WhenAll(currencies);
+    }
+
+    private IEnumerable<SelectListItem> ConvertCurrencyList(IEnumerable<CurrencyData> currencyData)
+    {
+        return currencyData.Select(cd =>
+            new SelectListItem
+            {
+                Value = cd.Symbol,
+                Text = $"{cd.Symbol} ({cd.Name})"
+            });
+    }
+}
+```
 
 ### Action Results
 |Type|Helper Method|
