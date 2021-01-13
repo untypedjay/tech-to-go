@@ -72,12 +72,11 @@ public class MoviesController : Controller
 <h2>@Model.Name</h2>
 ```
 ```cshtml
-@model IEnumerable
-<PersonModel
->
+@model IEnumerable<PersonModel>
 <html>
 <body>
-  @if (Model.Any()) {
+  @if (Model.Any())
+  {
     <table border="1">
     <tr>…</tr> 
     @foreach (PersonModel p in Model) {
@@ -89,7 +88,8 @@ public class MoviesController : Controller
     }
     </table>
   }
-  @else {
+  @else
+  {
     <p>No persons in list.</p>
   }
 </body>
