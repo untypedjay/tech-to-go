@@ -336,10 +336,12 @@ var query = employees.Where(e => e.City == "Linz")
 ### Co- and Contravariance
 * given. two types U and V with a < relation
 > Example 1: int < float < double
+
 > Example 2: V < U, if V is a sub class of U
 
 * let f be a function that maps U to another type U'
 > Example 1: T -> IEnumerable<T>
+  
 > Example 2: T -> T[]
   
 Let V < U. Then
