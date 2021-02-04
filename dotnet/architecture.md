@@ -118,14 +118,14 @@ C# code is compiled into Common Intermediate Language (CIL) code. It is platform
 
 - information about the data types in an Assembly
 - fixed part of the CIL
-- access via Reflection
+- access via reflections
 
 ## Full Framework: Private Assemblies
 
-- install by copy (no entries in registry)
-- used by an application
+- installed by copy (no entries in registry)
+- used by one application
 - installed in same directory of the application
-- Configuration: Application.exe.config
+- Configuration: `Application.exe.config`
 
 ## Full Framework: Public (Shared) Assemblies
 
