@@ -245,6 +245,15 @@ public class MainViewModel
 * dependency properties have additional characteristics: default value, inheritance in control element tree, event firing when value changes
 * dependency properties are used for styling, databinding and animation
 
+Use Cases for dependency properties:
+* inheritance of property values
+* styling of control elements
+* listening for property value changes
+
+### Attached Properties
+* special dependeny properties for arbitrary objects
+* typical use case: layout classes (`DockPanel.Dock`)
+
 ## WPF Controls
 ### `Button`
 ```xaml
@@ -336,3 +345,29 @@ private void TextBox_SelectionChanged(object sender, RoutedEventArgs e)
 
 ### `WrapPanel`
 * child control next to each other until there is no more space
+
+## Events
+
+## Commands
+
+## Data Binding
+
+## `INotifyPropertyChanged`
+```csharp
+public class Person : INotifyPropertyChanged {
+  private string name;
+  public event PropertyChangedEventHandler PropertyChanged;
+  
+  public string Name {
+    get => name;
+    set {
+      if (name != value) {
+        name = value;
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameOf(Name)));
+      }
+    }
+  }
+}
+```
+
+## MVVM
