@@ -59,7 +59,7 @@ A .NET app is developed for and runs in one or more implementations.
 
 # .NET Standard
 
-The API specification implemented by the Base Class Library of a .NET implementation.
+The API specification is implemented by library of a .NET implementation.
 
 ![](images/Screenshot_2020-11-07_at_22.42.03.png)
 
@@ -80,6 +80,17 @@ C# code is compiled into Common Intermediate Language (CIL) code. It is platform
 - easy code generation (stack machine)
 - compilation to native code at compilation time possible with .NET Native on .NET Core
 
+## Advantages
+* CPU independent
+* OS independent
+* language independent -> CLR
+* compact code
+* optimized code (machine-specific code provided by CLR)
+
+## Comparison to JVM
+* CLR always compiles IL code -> JIT-compiler
+* JVM interprets byte code
+
 ## Components
 
 1. Common Type System
@@ -90,6 +101,10 @@ C# code is compiled into Common Intermediate Language (CIL) code. It is platform
 ![](images/Screenshot_2020-11-07_at_22.43.31.png)
 
 ![](images/Screenshot_2020-11-07_at_22.44.28.png)
+
+# Tiered Compilation
+1. when called the first time (fast, non-optimized JIT-compilation -> "Ready to Run", native code at compile time)
+1. when called a specific amount (more expensive, optimized JIT-compilation)
 
 # Assemblies
 
