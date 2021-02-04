@@ -1,0 +1,273 @@
+# C# Advanced
+
+## Features
+### Characteristics of Java
+* OOP: inheritance, dynamic binding, interfaces
+* meta information
+* exception handling
+* static typing
+* garbage collection
+
+### Characteristics of C++
+* operator overloading
+* pointer
+
+### New Characteristics
+* call by reference (ref and out parameters)
+* value types (structs)
+
+## Types
+Value types are stored on the stack, reference types on the heap.
+
+### Value Types
+Default value is 0, '\0' or false. Copied by value at assignments.
+* simple type
+* enumeration
+```csharp
+enum Day:byte { Sun=1, Mon, Tue, Wed, Thu, Fri, Sat };
+Day d = Day.Sat;
+Console.WriteLine("day = {0}", d); // -> day = Sat
+```
+* struct
+```csharp
+struct Color {
+  public byte r, g, b;
+  public Color(byte r, byte g, byte b) {
+    this.r = r; this.g = g; this.b = b;
+  }
+}
+
+Color black = new Color();
+Color yellow = new Color(255, 255, 0);
+yellow.r = 200;
+```
+
+### Reference Types
+Default value is null. Copied by reference at assignments.
+* interface type
+* pointer type
+* array type
+* class type
+* delegate
+
+### Boxing
+Converting a value type into a reference type is called boxing.
+* implicit, if an object is needed
+```csharp
+string s = 123.ToString();
+```
+### Unboxing
+Converting a reference type into a value type is called unboxing.
+* explicit using a cast
+```csharp
+int i = 123;
+object o = i; // boxing
+int j = (int) o; // unboxing
+```
+
+### Nullable Types
+* value types that can hold the value `null`
+```csharp
+public struct Nullable<T> where T : struct {
+  public Nullable(T value);
+  public bool HasValue { get; }
+  public T Value { get; } 
+}
+
+int? i1 = 10; // implicit conversion
+int? i2 = null; // implicit conversion
+int j1 = i1.Value; // j1 == 10
+int j2 = (int) i1; // j2 == 10
+int j3 = i2 ?? ß; // j3 == 0
+```
+
+## Classes
+```csharp
+class Rational {
+  const double Eps = 0.001;
+  int a, b;
+  public Rational(int a, int b) { ... }
+  public void Add(Rational c) { ... }
+  public static Rational operator+(Rational r1, Rational r2) { ... }
+  public int Denom {
+    get { return b; }
+    set { b = value; }
+  }
+}
+```
+Content of a class:
+* constants
+* arrays
+* constructors and destructor
+* methods
+* operators
+* properties
+* indexers
+* events
+* static constructor
+* (inner) types
+
+## Visibility Attributes
+|Modifier|Scope|
+|:--------|:-------|
+|`public`|everywhere|
+|`protected`|declaring/derived classes|
+|`internal`|same assembly|
+|`protected internal`|protected OR internal|
+|`private protected`|protected AND internal|
+|`private`|declaring class|
+
+**Default Value**
+|||
+|:------|:--------|
+|methods/arrays|`private`|
+|outer type definitions|`internal`|
+|inner type definitions|`private`|
+|interface methods|`public`|
+|enumeration constants|`public`|
+
+## `IDisposable`
+Provides a mechanism for releasing unmanaged resources (explicit by user).
+```csharp
+public class A : IDisposable {
+  ~A() {
+    Dispose();
+  }
+  public void Dispose() {
+    // releasing resources
+    GC.SuppressFinalize(this);
+  }
+}
+```
+Usage:
+```csharp
+A a = null;
+try {
+  a = new A();
+  ...
+} finally {
+  a?.Dispose();
+}
+```
+OR
+```csharp
+using (A a = new A()) {
+  ...
+} // calls a.Dispose();
+```
+
+## Parameters
+### Call by Value
+```csharp
+int Twice(int m) { return 2 * m; }
+m = 5; n = Twice(m); // m == 5, n == 10
+```
+
+### `ref` Parameters
+* needs to be initialized
+```csharp
+void Twice(ref int n) { n *= 2; }
+n = 4; Twice(ref n); // n == 10
+```
+
+### `out` Parameters
+* does not need to be initialized
+```csharp
+void Twice(int m, out int n) { n = 2*m; }
+m = 5; Twice(m, out n); // m == 5, n == 10
+```
+
+## Properties
+```csharp
+class Circle {
+  private double rad = 0.0;
+  public double Radius {
+    get { return rad; }
+    set { rad = value; }
+  }
+}
+```
+```csharp
+Circle c = new Circle();
+c.Radius = 5.0; // setter called
+double r = c.Radius; // getter called
+```
+
+## Indexers
+* access an element in a collection with the index operator
+```csharp
+class BirthdayList {
+  public DateTime this[string name] {
+    get { return GetBirthDay(name); }
+    set { SetBirthDay(name, value); }
+  }
+}
+```
+```csharp
+BirthdayList bList = new BirthdayList();
+bList["Huber"] = new DateTime(1985, 04, 24);
+Console.Write("Birthday: {0}", bList["Huber"]);
+```
+
+## Overriding with `override`
+```csharp
+class A {
+  public virtual void F() {
+    ...
+  }
+}
+class B : A {
+  public override void F() {
+    ...
+  }
+}
+```
+```csharp
+public static void Main() {
+  A a1 = new A();
+  A a2 = new B();
+  B b = new B();
+  
+  a1.F(); // A.F()
+  a2.F(); // B.F()
+  b.F(); // B.F()
+}
+```
+
+## Overriding with `new`
+* a method declared with `new` is independent of the base class method
+* solves Fragile Base Class Problem (interchangeability)
+```csharp
+class A {
+  public virtual void F() {}
+  public void G() {}
+  public virtual void H() {}
+}
+class B : A {
+  public new void F() {}
+  public new virtual void G() {}
+  public override void H() {}
+}
+class C : B {
+  public override void G() {}
+  public new virtual void H() {}
+}
+```
+```csharp
+static void Main() {
+  A a1 = new B();
+  a1.F(); // A.F()
+  a1.G(); // A.G()
+  a1.H(); // B.H()
+  
+  A a2 = new C();
+  a2.F(); // A.F()
+  a2.G(); // A.G()
+  a2.H(); // B.H()
+  
+  B b = new C();
+  b.F(); // B.F()
+  b.G(); // C.G()
+  b.H(); // B.H()
+}
+```
