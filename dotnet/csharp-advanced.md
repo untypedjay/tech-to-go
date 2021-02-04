@@ -271,3 +271,85 @@ static void Main() {
   b.H(); // B.H()
 }
 ```
+
+## Extensions
+### Object Initializer
+```csharp
+Employee empl = new Employee { Id = 1, Name = "Musk", City = "Los Angeles" };
+```
+
+### Local Variable Type Interface
+```csharp
+var empls = new List<Employee>() { ... }
+```
+
+### Anonymous Types
+* classes where the interface is defined at object creation time
+```csharp
+var obj = new { Id = 1, Name = "Musk" };
+```
+
+### Lambda Expressions
+```csharp
+public delegate bool Predicate<T>(T obj);
+private static IEnumerable<T> FilterWhere(IEnumerable<T> numbers, Predicate<T> filter) {
+  foreach (T n in numbers)
+    if (filter(n))
+      yield return n;
+}
+```
+```csharp
+var oddNumbers = FilterWhere(numbers, n => n % 2 != 0);
+```
+
+### Extension Methods
+```csharp
+namespace EnumeratorExt {
+  public static class Enumerator {
+    public static int Sum(this IEnumerable<int> numbers) {
+      int sum = 0;
+      foreach (int i in numbers) sum += i;
+      return sum;
+    }
+  }
+}
+```
+```csharp
+using EnumeratorExt;
+var numbers = new List<int> { 2, 3, 5, 7 };
+int s = numbers.Sum();
+```
+
+### Language Integrated Query (LINQ)
+```csharp
+using System.Linq;
+IEnumerable<Employee> employees = ...;
+var query = from e in employees
+              where e.City === "Linz"
+              select new { Id = e.Id, Name = e.Name };
+```
+```csharp
+var query = employees.Where(e => e.City == "Linz")
+                     .Select(e => new { Id = e.Id, Name = e.Name });
+```
+
+### Co- and Contravariance
+* given. two types U and V with a < relation
+> Example 1: int < float < double
+> Example 2: V < U, if V is a sub class of U
+
+* let f be a function that maps U to another type U'
+> Example 1: T -> IEnumerable<T>
+> Example 2: T -> T[]
+  
+Let V < U. Then
+* f is covariant if f(V) < f(U)
+* f is contravariant if f(U) < f(V)
+* f is invariant if f is neighter covariant nor contravariant
+
+Examples:
+* T -> T[] // covariant
+* T -> GenericInterface<out T> // covariant
+* T -> GenericInterface<in T> // contravariant
+* T -> delegate T D() // covariant
+* T -> delegate void D(T t) // contravariant
