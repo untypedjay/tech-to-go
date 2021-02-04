@@ -355,3 +355,34 @@ Examples:
 * T -> GenericInterface<in T> // contravariant
 * T -> delegate T D() // covariant
 * T -> delegate void D(T t) // contravariant
+
+## Delegates & Events
+```csharp
+delegate void UpdateCallback(Args a);
+
+class Subject {
+  public event UpdateCallback Observers;
+  
+  public void Notify(Args a) {
+    Observers?.Invoke(a);
+  }
+}
+```
+```csharp
+class Observer {
+  public static void StaticUpdate(Args a) {
+    ...
+  }
+  
+  public void Update(Args a) {
+    ...
+  }
+}
+```
+```csharp
+Subject s = new Subject();
+Observer o = new Observer();
+s.Observers += o.Update;
+s.Observers += Observer.StaticUpdate;
+s.Notify(new Args());
+```
