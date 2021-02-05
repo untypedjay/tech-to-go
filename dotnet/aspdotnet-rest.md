@@ -1,6 +1,16 @@
 # ASP.NET RESTful Web-Services
 
+## Successful Web Architecture
+* addressable resources: resources are the center (vs method centered -> SOAP)
+* uniform, constrained interface (HTTP methods)
+* representation oriented: resources in different representations (XML, JSON, YAML, ...)
+* communicate statelessly
+* Hypermedia As The Engine Of Application State(HATEOAS): resources contain links to possible operations
+
 ## Controller
+* every HTTP request gets routed to a controller
+* request data already in correct format when entering controller
+* controller is connection to business logic
 ```cs
 [Route("api/[controller]")]
 [ApiController]
@@ -75,3 +85,8 @@ public class CurrenciesController : ControllerBase
     }
 }
 ```
+
+## OpenAPI/Swagger
+Purpose:
+* generate documentation
+* implement proxies (service or client)
