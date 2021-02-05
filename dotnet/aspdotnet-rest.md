@@ -89,4 +89,4 @@ public class CurrenciesController : ControllerBase
 ## OpenAPI/Swagger
 Purpose:
 * generate documentation
-* implement proxies (service or client)
+* generate proxies classes (service or client)
