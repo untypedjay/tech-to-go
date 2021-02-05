@@ -1,4 +1,10 @@
-# ASP.NET MVC
+# ASP.NET Core MVC
+
+## Architecture
+* Host (management of request pipeline): configuration of components, self-hosting
+* Server (listening for requests and forwarding them to the pipeline): IIS, Http.sys, Kestrel
+* Midddleware (component of the pipeline, processes requests): request/response context, configured in `Startup` class
+* Application: Web, SignalR, REST-Service, ...
 
 ## Directory Structure
 * wwwroot: root directory of web server
