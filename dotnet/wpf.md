@@ -353,6 +353,7 @@ private void TextBox_SelectionChanged(object sender, RoutedEventArgs e)
 ## Data Binding
 
 ## `INotifyPropertyChanged`
+* implementing classes notify subscribed clients in case of value changes on their properties
 ```csharp
 public class Person : INotifyPropertyChanged {
   private string name;
@@ -371,3 +372,6 @@ public class Person : INotifyPropertyChanged {
 ```
 
 ## MVVM
+* ViewModel prepares data for View
+* View and ViewModal only coupled through data binding
+* ViewModel passes values changes through PropertyChange events
