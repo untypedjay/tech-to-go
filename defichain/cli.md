@@ -78,144 +78,144 @@ generatetoaddress 11 "myaddress"
 ### `resignmasternode`
 
 ## Mining
-getblocktemplate
-getmintinginfo
-getnetworkhashps
-prioritisetransaction
-submitblock
-submitheader
+### `getblocktemplate`
+### `getmintinginfo`
+### `getnetworkhashps`
+### `prioritisetransaction`
+### `submitblock`
+### `submitheader`
 
 ## Network
-addnode
-clearbanned
-disconnectnode
-getaddednodeinfo
-getconnectioncount
-getnettotals
-getnetworkinfo
-getnodeaddresses
-getpeerinfo
-listbanned
-ping
-setban
-setnetworkactive
+### `addnode`
+### `clearbanned`
+### `disconnectnode`
+### `getaddednodeinfo`
+### `getconnectioncount`
+### `getnettotals`
+### `getnetworkinfo`
+### `getnodeaddresses`
+### `getpeerinfo`
+### `listbanned`
+### `ping`
+### `setban`
+### `setnetworkactive`
 
 ## Poolpair
-addpoolliquidity
-createpoolpair
-getpoolpair
-listpoolpairs
-listpoolshares
-poolswap
-removepoolliquidity
-testpoolswap
-updatepoolpair
+### `addpoolliquidity`
+### `createpoolpair`
+### `getpoolpair`
+### `listpoolpairs`
+### `listpoolshares`
+### `poolswap`
+### `removepoolliquidity`
+### `testpoolswap`
+### `updatepoolpair`
 
 ## Rawtransactions
-analyzepsbt
-combinepsbt
-combinerawtransaction
-converttopsbt
-createpsbt
-createrawtransaction
-decodepsbt
-decoderawtransaction
-decodescript
-finalizepsbt
-fundrawtransaction
-getrawtransaction
-joinpsbts
-sendrawtransaction
-signrawtransaction
-signrawtransactionwithkey
-testmempoolaccept
-utxoupdatepsbt
+### `analyzepsbt`
+### `combinepsbt`
+### `combinerawtransaction`
+### `converttopsbt`
+### `createpsbt`
+### `createrawtransaction`
+### `decodepsbt`
+### `decoderawtransaction`
+### `decodescript`
+### `finalizepsbt`
+### `fundrawtransaction`
+### `getrawtransaction`
+### `joinpsbts`
+### `sendrawtransaction`
+### `signrawtransaction`
+### `signrawtransactionwithkey`
+### `testmempoolaccept`
+### `utxoupdatepsbt`
 
 ## Spv
-spv_createanchor
-spv_createanchortemplate
-spv_estimateanchorcost
-spv_gettxconfirmations
-spv_listanchorauths
-spv_listanchorrewardconfirms
-spv_listanchorrewards
-spv_listanchors
-spv_rescan
-spv_sendrawtx
-spv_splitutxo
-spv_syncstatus
+### `spv_createanchor`
+### `spv_createanchortemplate`
+### `spv_estimateanchorcost`
+### `spv_gettxconfirmations`
+### `spv_listanchorauths`
+### `spv_listanchorrewardconfirms`
+### `spv_listanchorrewards`
+### `spv_listanchors`
+### `spv_rescan`
+### `spv_sendrawtx`
+### `spv_splitutxo`
+### `spv_syncstatus`
 
 ## Tokens
-createtoken
-getcustomtx
-gettoken
-listtokens
-minttokens
-updatetoken
+### `createtoken`
+### `getcustomtx`
+### `gettoken`
+### `listtokens`
+### `minttokens`
+### `updatetoken`
 
 ## Util
-createmultisig
-deriveaddresses
-estimatesmartfee
-getdescriptorinfo
-signmessagewithprivkey
-validateaddress
-verifymessage
+### `createmultisig`
+### `deriveaddresses`
+### `estimatesmartfee`
+### `getdescriptorinfo`
+### `signmessagewithprivkey`
+### `validateaddress`
+### `verifymessage`
 
 ## Wallet
-abandontransaction
-abortrescan
-addmultisigaddress
-backupwallet
-bumpfee
-createwallet
-dumpprivkey
-dumpwallet
-encryptwallet
-getaddressesbylabel
-getaddressinfo
-getbalance
-getbalances
-getnewaddress
-getrawchangeaddress
-getreceivedbylabel
-gettransaction
-getunconfirmedbalance
-getwalletinfo
-importaddress
-importmulti
-importprivkey
-importprunedfunds
-importpubkey
-importwallet
-keypoolrefill
-listaddressgroupings
-listlabels
-listlockunspent
-listreceivedbyaddress
-listrecievedbylabel
-listsinceblock
-listtransactions
-listunspent
-listwalletdir
-listwallets
-loadwallet
-lockunspent
-removeprunedfunds
-rescanblockchain
-sendmany
-sendtoaddress
-sethdseed
-setlabel
-settxfee
-setwalletflag
-signmessage
-signrawtransactionwithwallet
-walletcreatefundedpsbt
-walletlock
-walletpassphrase
-walletpassphrasechange
-walletprocesspsbt
+### `abandontransaction`
+### `abortrescan`
+### `addmultisigaddress`
+### `backupwallet`
+### `bumpfee`
+### `createwallet`
+### `dumpprivkey`
+### `dumpwallet`
+### `encryptwallet`
+### `getaddressesbylabel`
+### `getaddressinfo`
+### `getbalance`
+### `getbalances`
+### `getnewaddress`
+### `getrawchangeaddress`
+### `getreceivedbylabel`
+### `gettransaction`
+### `getunconfirmedbalance`
+### `getwalletinfo`
+### `importaddress`
+### `importmulti`
+### `importprivkey`
+### `importprunedfunds`
+### `importpubkey`
+### `importwallet`
+### `keypoolrefill`
+### `listaddressgroupings`
+### `listlabels`
+### `listlockunspent`
+### `listreceivedbyaddress`
+### `listrecievedbylabel`
+### `listsinceblock`
+### `listtransactions`
+### `listunspent`
+### `listwalletdir`
+### `listwallets`
+### `loadwallet`
+### `lockunspent`
+### `removeprunedfunds`
+### `rescanblockchain`
+### `sendmany`
+### `sendtoaddress`
+### `sethdseed`
+### `setlabel`
+### `settxfee`
+### `setwalletflag`
+### `signmessage`
+### `signrawtransactionwithwallet`
+### `walletcreatefundedpsbt`
+### `walletlock`
+### `walletpassphrase`
+### `walletpassphrasechange`
+### `walletprocesspsbt`
 
 ## Zmq
 ### `getzmqnotifications`
