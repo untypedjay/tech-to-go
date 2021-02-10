@@ -72,6 +72,23 @@ generatetoaddress 11 "myaddress"
 
 ## Masternodes
 ### `createmasternode`
+Creates (and submits to local node and network) a masternode creation transaction with given owner and operator addresses, spending the given inputs.
+The last optional argument (may be empty array) is an array of specific UTXOs to spend.
+
+**Syntax:**
+```zsh
+createmasternode "ownerAddress" ("operatorAddress" [{"txid":"hex","vout":n},...] )
+```
+
+**Arguments:**
+1. ownerAddress (string, required): any valid address for keeping collateral amount
+1. operatorAddress (string, optional): masternode operator auth address
+1. inputs (json array, optional): transaction IDs and the output numbers
+
+**Examples:**
+```zsh
+createmasternode ownerAddress operatorAddress '[{"txid":"id","vout":0}]'
+```
 ### `getmasternode`
 ### `listcriminalproofs`
 ### `listmasternodes`
