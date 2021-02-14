@@ -45,11 +45,36 @@
 
 ## Control
 ### `getmemoryinfo`
+Returns an object containing information about memory usage.
+
+**Syntax:**
+```zsh
+getmemoryinfo ( "mode" )
+```
+
+**Arguments:**
+1. mode (string, optional, default="stats"): determines what kind of information is returned
+
 ### `getrpcinfo`
+Returns details of the RPC server.
+
 ### `help`
+List all commands or get help for a specified command.
+
+**Syntax:**
+```zsh
+help ( "command" )
+```
+
+**Arguments:**
+1. command (string, optional, default = all commands): the command to get help on
+
 ### `logging`
 ### `stop`
+Stop Defi server.
+
 ### `uptime`
+Returns the total uptime (in seconds) of the server.
 
 ## Generating
 ### `generatetoaddress`
@@ -63,7 +88,7 @@ generatetoaddress nblocks "address" ( maxtries )
 **Arguments:**
 1. nblocks (numeric, required): how many blocks are generated immediately
 1. address (string, required): the address to send the newly generated DFI to
-1. maxtries (numeric, optional, default=-1) how many iterations to try
+1. maxtries (numeric, optional, default=-1): how many iterations to try
 
 **Examples:**
 ```zsh
