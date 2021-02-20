@@ -7,6 +7,7 @@
 :q! # quit without saving
 esc # leave current mode
 u # undo last action
+:set number # add line numbers
 ```
 
 ## Copy & Paste
@@ -37,6 +38,23 @@ gg # to to the top of the file
 0 # go to start of the line
 $ # go to end of the line
 :10 # go to line 10
+{ # go one block up
+} # go one block down
+20j # go down 20 lines
+4k # go up 4 lines
+9{ # go up 9 paragraphs
+3} # go down 3 paragraphs
+w # go to next word
+b # go to previous word
+^ # go to first word of the line
+W # go to next word after space
+B # go to previous word before space
+ta # go before the next a
+f? # go exactly to the next ?
+% # toggle between two braces
+* # go to next occurence of current word
+; # go to next same character
+z # center cursor
 ```
 
 ## Deleting
