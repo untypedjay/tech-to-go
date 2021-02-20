@@ -8,6 +8,7 @@
 esc # leave current mode
 u # undo last action
 :set number # add line numbers
+. # re-do last command
 ```
 
 ## Copy & Paste
@@ -25,6 +26,13 @@ a # enter insert mode on the next character
 A # enter insert mode on the end of the line
 o # add new line below and enter insert mode
 O # add new line above and enter insert mode
+```
+
+## Other Modes
+```zsh
+v # enter visual mode
+V # enter visual line mode
+R # enter replace mode
 ```
 
 ## Navigation
@@ -62,5 +70,11 @@ z # center cursor
 x # delete current letter
 10x # delete 10 letters
 dd # delete current line and copy it to clipboard
+5dd # delete 5 lines
+d} # delete block below
+d{ # delete block above
+dw # delete current word
 D # delete rest of the line
+C # delete rest of the line and go into insert mode
+cw # delete current word and go into insert mode
 ```
