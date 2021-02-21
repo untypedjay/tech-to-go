@@ -3,18 +3,21 @@
 ## Basics
 ```zsh
 :q # quit
+:w # save
 :wq # save and quit
 :q! # quit without saving
 esc # leave current mode
 u # undo last action
 :set number # add line numbers
 . # re-do last command
+!node test.js # run shell command in vim
 ```
 
 ## Copy & Paste
 ```zsh
 yy # copy line to vim clipboard
 p # insert line from vim clipboard below
++p # insert from system clipboard
 P # insert line from vim clipboard above
 ```
 
