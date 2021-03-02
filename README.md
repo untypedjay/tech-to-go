@@ -5,7 +5,8 @@ A knowledge base of selected technologies.
 
 ## Topics
 ### 💬 Languages
-* [<img src="https://img.shields.io/badge/Java-d10203"/>](https://github.com/untypedjay/tech-to-go/blob/main/languages/java/)
+* [<img src="https://img.shields.io/badge/Java-D10203"/>](https://github.com/untypedjay/tech-to-go/blob/main/languages/java/)
+* [<img src="https://img.shields.io/badge/JavaScript-F7E116"/>](https://github.com/untypedjay/tech-to-go/blob/main/languages/js/)
 
 ## Acknowledgment
 This project is inspired by [Tech Refrigerator](https://github.com/GimunLee/tech-refrigerator).
