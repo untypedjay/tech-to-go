@@ -24,16 +24,36 @@
 - toArray()
 
 ## ArrayList
-
 Elements can be added and removed dynamically.
 
-## LinkedList
+```java
+import java.util.ArrayList;
+// ...
+ArrayList box = new ArrayList();
+Horse fury = new Horse("Fury", 1955);
+box.add(fury));
+```
 
+## LinkedList
 A sequence of links which contains items.
 
-## Vector
+```java
+import java.util.List;
+import java.util.LinkedList;
+import java.util.ListIterator;
+import java.util.Iterator;
 
-Like ArrayList, but synchronized (thread safe). 
+LinkedList<Element> list = new LinkedList<>();
+Iterator<Element> iterator = list.iterator();
+while (iterator.hasNext()) {
+  Element element = iterator.next();
+  // modify the element
+}
+```
+
+## Vector
+Like ArrayList, but synchronized (thread safe).
+
 
 ## Stack
 
