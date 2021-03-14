@@ -1,9 +1,9 @@
 # O/R Mapping
 > An O/R mapper maps object oriented classes of an application to the relational model of a database.
-> 
+
 An O/R mapper consists of the following components:
 * ways to describe the mapping of classes to tables (metadata)
-* API for CRUDD operations
+* API for CRUD operations
 * query language, embedded into the object model
 * transaction handling
 * caching strategies
