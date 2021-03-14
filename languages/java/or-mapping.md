@@ -219,6 +219,106 @@ UPDATE Employee lastName=?, dateOfBirth=?, ... WHERE id=?
 ```
 
 ## Architecture of Hibernate and the JPA
+* the JPA is a standard based on a JSR (Java Specification Request) with multiple implementations
+* Hibernate is an open-source ORM framework for Java
+* Hibernate supports annotations and APIs of the JPA
+* Hiberante has more functionality than the JPA
+
+### Main Components of Hibernate
+![](./resources/orm_architecture_hibernate.png)
+* interface for configuration of DB connection: `Configuration`
+* interface abstracting the database: `SessionFactory`
+* interfaces for CRUD operations: `Session`, `Query`, `Transaction`
+* interfaces to react on lifecycle events: `Interceptor`, `LoadEventListener`, `PersistEventListener`, ...
+* interfaces to exend Hibernate: `UserType`, `IdentifierGenerator`
+
+### Connection of Important Interfaces
+Persistence code is only dependent on interfaces using the _Factory Method_ pattern.
+![](./resources/orm_interfaces.png)
+* `Configuration`: read configuration parameters and mapping documents
+* `ServiceRegistry`: collection of service objects, representing the configuration parameters
+* `SessionFactory`: abstraction of a database connection (thread safe)
+
+### Basic Structure of a Hibernate Application
+```java
+Configuration cfg = new Configuration().configure("hibernate.cfg.xml");
+SessionFactory sessionFactory = cfg.buildSessionFactory();
+Session session = null;
+Transaction tx = null // org.hibernate.Transaction
+try {
+  session = sessionFactory.openSession();
+  tx = session.beginTransaction();
+  // persistence code comes here
+  tx.commit();
+} catch (Exception e) {
+  if (tx != null) tx.rollback();
+} finally {
+  if (session != null) session.close();
+}
+sessionFactory.close();
+```
+
+`hibernate.cfg.xml`
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE ... "http://./hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+  <session-factory>
+    <property name="hibernate.connection.driver_class">org.apache.derby.jdbc.ClientDriver</property>
+    <property name="hibernate.connection.url">jdbc:derby://localhost/WorkLogDb</property>
+    <property name="hibernate.dialect">org.hibernate.dialect.DerbyDialect</property>
+    <property name="hibernate.hbm2ddl.auto">create</property>
+    <mapping resource="swt6/domain/Employee.hbm.xml"/>
+  </session-factory>
+</hibernate-configuration>
+```
+![](./resources/orm_architecture_jpa.png)
+
+### Important Interfaces of the Persistence Manager
+|JPA|Hibernate|Purpose|
+|:---|:---|:---|
+|`javax.persistence`|`org.hibernate`|base namespace|
+|`EntityManagerFactory`|`SessionFactory`|heavy-weighted database abstraction|
+|`EntityManager`|`Session`|light-weighted execution of persistence operations|
+|`EntityTransaction`|`Transaction`|interface, with a concrete transaction API|
+|`Query`|`Query`|execution of queries with objects of the domain model|
+
+### Basic Structure of a JPA Application
+```java
+EntityManagerFactory emFactory = Persistence.createEntityManagerFactory("PersisttenceUnit");
+EntityManager em = null;
+EntityTransaction tx = null;
+try {
+  em = emFactory.createEntityManager();
+  tx = em.getTransaction();
+  tx.begin();
+  // persistence code goes here
+  tx.commit();
+} catch (Exception e) {
+  if (tx != null && tx.isActive()) tx.rollback();
+} finally {
+  if (em != null) em.close();
+}
+emFactory.close();
+```
+
+`persistence.xml`
+```xml
+<persistence xmlns=...>
+  <persistence-unit name="PersistenceUnit">
+    <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+    <mapping-file>META-INF/orm.xml</mapping-file>
+    <class>swt6.domain.Employee</class>
+    <properties>
+      <property name="javax.persistence.jdbc.driver" value="org.apache.derby.jdbc.ClientDriver"/>
+      <property name="javax.persistence.jdbc.url" value="jdbc:derby://localhost/WorkLogDb"/>
+      <property name="hibernate.show_sql" value="true"/>
+      <property name="hibernate.format_sql" value="true"/>
+    </properties>
+  </persistence-unit>
+</persistence>
+```
+* one `<persistence-unit>` per database
 
 ## Mapping of Persistent Classes to the Database
 ## Persistence Manager
