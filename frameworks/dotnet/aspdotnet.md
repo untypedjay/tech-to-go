@@ -1,10 +1,14 @@
-# ASP.NET Core MVC
+# ASP.NET Core
+ASP.NET is a collection of technologies to develop web applications.
+* ASP.NET Web Forms
+* ASP.NET MVC
+* ASP.NET Core
 
 ## Architecture
 * Host (management of request pipeline): configuration of components, self-hosting
 * Server (listening for requests and forwarding them to the pipeline): IIS, Http.sys, Kestrel
 * Midddleware (component of the pipeline, processes requests): request/response context, configured in `Startup` class
-* Application: Web, SignalR, REST-Service, ...
+* Application: Web- or SignalR application, REST-Service, ...
 
 ## Directory Structure
 * wwwroot: root directory of web server
