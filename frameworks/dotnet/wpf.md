@@ -112,7 +112,7 @@ public class HelloWindow : Window {
 }
 ```
 
-### `Application`and `Window` Classes
+### `Application` and `Window` Classes
 * class `Application`: manages the windows and the main loop of the application (`Application app = new Application();`)
 * method `Run`: starts the main loop
 * method `ShutDown`: ends the main loop
@@ -347,10 +347,40 @@ private void TextBox_SelectionChanged(object sender, RoutedEventArgs e)
 * child control next to each other until there is no more space
 
 ## Events
+```xaml
+<Button Name="button1" Click="ButtonClick" Content="Button 1"/>
+```
+```csharp
+private void ButtonClick(object sender, RoutedEventArgs e) { ... }
+```
 
 ## Commands
+* abstraction of user actions
+```xaml
+<Window.InputBindings>
+  <KeyBinding Command="ApplicationCommands.Save" Key="S" Modifiers="Control"/>
+</Window.InputBindings>
+<MenuItem Header="_Save" Command="ApplicationCommands.Save"/>
+<Button Content="Save" Command="ApplicationCommands.Save"/
+<Window.CommandBindings>
+  <CommandBinding Command="ApplicationCommands.Save" Executed="SaveExecuteHandler" CanExecute="SaveCanExecuteHandler"/>
+</Window.CommandBindings>
+```
+```csharp
+public void SaveExecutionHandler(object sender, ExecutedRoutedEventArgs e) { ... }
+public void SaveCanExecuteHandler(object sender, CanExecuteRoutedEventArgs e) {
+  e.CanExecute = ...;
+}
+```
 
 ## Data Binding
+* between GUI elements:
+```xaml
+<StackPanel>
+  <Slider Name="slider" Value="50" Minimum="0" Maximum="100" ... />
+  <TextBox Name="textBox" Text="{Binding ElementName=slider, Path=Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ... />
+</StackPanel>
+```
 
 ## `INotifyPropertyChanged`
 * implementing classes notify subscribed clients in case of value changes on their properties
