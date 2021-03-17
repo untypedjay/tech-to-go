@@ -357,20 +357,77 @@ Examples:
 * T -> delegate void D(T t) // contravariant
 
 ## Delegates & Events
+* definition of a delegate reference:
 ```csharp
-delegate void UpdateCallback(Args a);
-
-class Subject {
-  public event UpdateCallback Observers;
-  
-  public void Notify(Args a) {
-    Observers?.Invoke(a);
+Callback callback1 = null;
+```
+* creation of a delegate object:
+```csharp
+class Observer {
+  public Result Method(Args arg) { ... }
+  public static Result StaticMethod(Args arg) { ... }
+}
+```
+```csharp
+Observer o = new Observer();
+callback1 = new Callback(o.Method);
+callback2 = new Callback(Observer.StaticMethod);
+callback3 = o.Method // C# 2.0 onwards
+```
+* call of registered methods:
+```csharp
+callback1(new Args()); // callback1 cannot be null
+callback(new Args());
+```
+### Multicast Delegates
+It is possible to subscribe multiple methods on a callback:
+```csharp
+Observer o = new Observer();
+Callback callback = new Callback(o.Method);
+callback += new Callback(Observerr.StaticMethod);
+```
+### Events
+Delegate fields can be declared as an `event` so it is only callable by a method inside the same class:
+```csharp
+class EventSource {
+  public event Callback OnCallback;
+  void FireEvent() {
+    if (OnCallback != null)
+      OnCallback(new Args());
   }
 }
 ```
 ```csharp
-class Observer {
-  public static void StaticUpdate(Args a) {
+EventSource source = new EventSource();
+source.=nCallback += new Callback(o.Method);
+
+source.OnCallback = new Callback(...); // error
+source.OnCallback(new Args()); // error
+```
+
+### Checking on `null`
+```csharp
+public event Callback OnCallback;
+void FireEvent() {
+  OnCallback?.Invoke(new Args());
+}
+```
+
+### Implementation of Observer Pattern
+```csharp
+delegate void UpdateCallback(Args a); // step 1: define delegate like ...EventHandler(Object sender, EventArgs args);
+
+class Subject {
+  public event UpdateCallback Observers; // step 2: define event
+  
+  public void Notify(Args a) { // step 3: raise event
+    Observers?.Invoke(a); // could also be: ...Invoke(this, EventArgs.empty);
+  }
+}
+```
+```csharp
+class Observer { // step 4: implement observer
+  public static void StaticUpdate(Args a) { // or OnVideoEncoded(object sender, EventArgs args)
     ...
   }
   
