@@ -26,7 +26,7 @@ public class CurrenciesController : ControllerBase
     [HttpGet]
     public async Task<IEnumerable<CurrencyData>> GetAll()
     {
-        return await GetAllCurrencyDataAsync();
+        return await Logic.GetAllCurrencyDataAsync();
     }
 
     [HttpGet("{symbol}")]
