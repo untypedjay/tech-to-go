@@ -93,3 +93,34 @@ Isolation Levels:
 * REPEATABLE_READ
 * SERIALIZABLE
 * DEFAULT
+
+### Definition of Transaction Attributes
+We want to have transactions within our business logic but without technology specific code.
+The transaction can by configured suing transaction attributes.
+
+```xml
+<tx:advice id="txAdvice" transaction-manager="...">
+  <tx:attributes>
+    <tx:method
+      name="methodName"
+      propagation="PROPAGATION_ATTRIBUTE"
+      isolation="ISOLATION_LEVEL"
+      read-only="true|false"
+      rollback-for="exception,..."
+      no-rollback-for="exception,..."
+    />
+  </tx:attributes>
+</tx:advice>
+```
+```java
+@Transactional
+public class WorkLogImpl implements WorkLogFacade {
+  @Transactional(readOnly=true)
+  public Employee findEmployeeById(Long id) { ... }
+
+  @Transactional(propagation=Propagation.REQUIRES_NEW)
+  public void saveEmployee(Employee employee) { ... }
+
+  public void deleteEmployee(Employee employee) { ... }
+}
+```
