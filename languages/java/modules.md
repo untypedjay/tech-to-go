@@ -1,4 +1,11 @@
 # Modules
+We want to encapsulate visibility.
+
+Packages:
+* only public classes are in other packages visible
+* all public classes are globally visible (even outside of JARs)
+* visibility between packages equalls visiblity outside of the JAR
+
 ## `module-info.java`
 ```java
 module module1 {
