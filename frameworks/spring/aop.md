@@ -1,5 +1,5 @@
 # Aspect Oriented Programming (AOP) with Spring
-Some tasks (logging, security, transactions, ressource management...) are spread around the entire application (cross-cutting concerns).
+Some tasks (logging, security, transactions, resource management...) are spread around the entire application (cross-cutting concerns).
 AOP makes it possible to group those tasks together (modularization of cross-cutting concerns) and use them without calling them.
 
 ## Definitions
