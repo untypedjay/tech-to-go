@@ -426,4 +426,10 @@ Methods:
 * transaction management
 * caching (buffered objects)
 
-## Transactions & Caching
+### Fetching Types
+* lazy: connected objects will be loaded at first access of connected object -> n + 1 selects problem
+* eager: connected objects will be loaded immediately (using a JOIN operation) -> cartesian product problem
+
+### Fetching Modes
+* select: two SELECTs
+* join: one JOI
