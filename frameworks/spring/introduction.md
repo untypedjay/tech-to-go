@@ -1,15 +1,15 @@
 # Spring Introduction
-Spring is a lightweight container framework which is based on Inversion of Control and aspect oriented programming.
+Spring is a lightweight container framework which is based on Inversion of Control and Aspect Oriented Programming.
 
 Dependency Injection can be treated almost synonymously with Inversion of Control. It is a mechanism to achieve Loose Coupling between components.
 * **lightweight**: modular, business logic independent of the framework, no heavy runtime container necessary
 * **Inversion of Control**: components get notified of dependencies (from the container)
-* **aspect oriented programming**: business logic and system services are separated from each other
+* **Aspect Oriented Programming**: business logic and system services are separated from each other
 * **container**: responsible for the component lifecycle, manages dependencies between components
 
 ## Basic Application Structure
 * Business Logic (components -> interfaces)
-* Client (configuration file, main pethod)
+* Client (configuration file, main method)
 * Spring (BeanFactory/ApplicationContext)
 
 ```java
