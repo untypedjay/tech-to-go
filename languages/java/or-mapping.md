@@ -1,5 +1,6 @@
 # O/R Mapping
 > An O/R mapper maps object oriented classes of an application to the relational model of a database.
+> The persistence manager allows read and write access to the database.
 
 An O/R mapper consists of the following components:
 * ways to describe the mapping of classes to tables (metadata)
@@ -321,5 +322,108 @@ emFactory.close();
 * one `<persistence-unit>` per database
 
 ## Mapping of Persistent Classes to the Database
+### Hibernate Mapping Document
+```xml
+<?xml version="1.0"?>
+<!DOCTYPE ... "http://../hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.example.domain">
+  <class name="Employee" table="TBL_EMPLOYEE">
+    <id name="id" type="long">
+      <column name="id"/>
+      <generator class="native"/>
+    </id>
+   <property name="lastName" type="string">
+     <column name="lastName"/>
+   </property>
+   <property name="dateOfBirth" type="LocalDate" access="field">
+     <columnname="dateOfBirth"/>
+   </property>
+ </class>
+</hibernate-mapping>
+```
+
+### Hibernate / JPA Mapping Using Annotations
+```java
+@Entity
+@Table(name="TBL_EMPLOYEE")
+public class Employee {
+  @Id @GeneratedValue
+  private Long id;
+  
+  @Column(length=15, nullable=false)
+  @Access(AccessType.PROPERTY)
+  private String lastName;
+  
+  @Transient
+  int age;
+  public Employee() { }
+  
+  public  Long getId() {
+    return id;
+  }
+  
+  private void setId(Long id) {
+    this.id = id;
+  }
+  
+  public String getLastName() {
+    return lastName;
+  }
+  
+  public void setLastName(String ln) {
+    this.lastname= ln;
+  }
+  
+  public intgetAge() {
+    return age;
+  }
+  
+  public void setAge(intage) {
+    this.age= age;
+  }
+}
+```
+
+### JPA Mapping Document
+```xml
+<entity-mappings...>
+  <entity class="com.example.domain.Employee">
+    <table name="TBL_EMPLOYEE"/>
+    <attributes>
+     <id name="id"><generated-value strategy="TABLE"/></id>
+     <basic name="lastName">
+       <column length="30" nullable="true"/>
+     </basic>
+   </attributes>
+ </entity>
+</entity-mappings>
+```
+
+### Keys
+* maximum of current key + 1: needs to be numeric
+* identity column (auto-increment): very efficient but needs to come from database
+* sequences: very efficient
+* helper table: less efficient but on all DBMS possible
+* GUID, UUID: takes a lot of memory
+
+The high low algorithm makes it more efficient by assigning the application a key range and database access is only necessary after this range is depleted.
 ## Persistence Manager
+### Lifecycle of Domain Objects
+* transient: not managed by persistence manager
+* persistent: have id in database, are part of transactions and stay up to date (automatic dirty checking)
+* detached: connection to persistence manager is closed but stay in memory
+
+Methods:
+* new -> persistent: find, getReference
+* transient -> persistent: persist, merge
+* persistent -> transient: remove
+* persistent -> detached: detach, close, clear
+* detached -> persistent: lock, merge
+
+### Responsibilites of Persistence Manager
+* save, load and update objects
+* queries
+* transaction management
+* caching (buffered objects)
+
 ## Transactions & Caching
