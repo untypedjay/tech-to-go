@@ -21,7 +21,7 @@ try (AbstractApplicationContext factory = new ClassPathXmlApplicationContext("<p
   id="workLog"
   class="com.example.WorkLogImpl"
   init-method="setup"
-  destroyMethod="dispose"
+  destroy-method="dispose"
 >
   <property name="maxEmployees">
     <value>100</value>
