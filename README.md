@@ -20,6 +20,7 @@ A knowledge base of selected technologies.
 * [<img src="https://img.shields.io/badge/Git-F05030"/>](./tools/git.md)
 * [<img src="https://img.shields.io/badge/Maven-FB6605"/>](./tools/maven.md)
 * [<img src="https://img.shields.io/badge/npm-D50000"/>](./tools/npm.md)
+* [<img src="https://img.shields.io/badge/Sass-CF649A"/>](./tools/sass.md)
 * [<img src="https://img.shields.io/badge/Vim-019833"/>](./tools/vim.md)
 
 ## Acknowledgment
