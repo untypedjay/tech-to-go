@@ -23,6 +23,7 @@ A knowledge base of selected technologies.
 * [<img src="https://img.shields.io/badge/npm-D50000"/>](./tools/npm.md)
 * [<img src="https://img.shields.io/badge/Sass-CF649A"/>](./tools/sass.md)
 * [<img src="https://img.shields.io/badge/Vim-019833"/>](./tools/vim.md)
+* [<img src="https://img.shields.io/badge/Webpack-76AFCC"/>](./tools/webpack.md)
 
 ## Acknowledgment
 This project is inspired by [Tech Refrigerator](https://github.com/GimunLee/tech-refrigerator).
