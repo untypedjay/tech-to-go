@@ -5,7 +5,16 @@ can transform front-end assets like HTML, CSS, and images if the
 corresponding loaders are included.
 
 ## Installation
+Globally:
 `npm i -g webpack`
+
+Locally:
+`npm i -D webpack webpackcli`
+
+NPM Scripts:
+```json
+"start": "webpack"
+```
 
 ## Concept
 Webpack looks up all dependencies and bundles them together with your code into `app.bundle.js`.
@@ -16,6 +25,8 @@ Webpack looks up all dependencies and bundles them together with your code into 
 ### `webpack.config.js`
 ```js
 module.exports = {
+  mode: 'development',
+  devtool: 'none',
   entry: './app.js',
   output: {
     path: __dirname,
@@ -28,3 +39,4 @@ module.exports = {
   }
 }
 ```
+* development mode does not minify the code
