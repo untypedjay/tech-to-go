@@ -6,8 +6,8 @@ A knowledge base of selected technologies.
 ## Topics
 ### 🌀 Frameworks
 * [<img src="https://img.shields.io/badge/.NET-6E16E7"/>](./frameworks/dotnet)
-* [<img src="https://img.shields.io/badge/Spring-6EB33F"/>](./frameworks/spring)
 * [<img src="https://img.shields.io/badge/React-61DAFB"/>](./frameworks/react)
+* [<img src="https://img.shields.io/badge/Spring-6EB33F"/>](./frameworks/spring)
 
 ### 🖥️ Hardware
 * [<img src="https://img.shields.io/badge/Computer%20Memory-219081"/>](./hardware/memory.md)
