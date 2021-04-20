@@ -2,22 +2,363 @@
 React is a JavaScript library for building user interfaces.
 
 ## Introduction
-
+### Hello World
+```js
+ReactDOM.render(
+  <h1>Hello, world!</h1>,
+  document.getElementById('root')
+);
+```
 ## JSX
+JSX is a syntax extension to JavaScript to describe what the UI should look like. It produces React elements that will be rendered to the DOM. It is not required in order to use React, but is usually easier to visualize the UI in that way.
+* can be nested
+* children without content should use the self closing tag
+* input is safe from injection attacks
+
+### Embedded Expressions
+* any valid JavaScript expression can be put between curly brances in JSX
+```js
+const name = 'Elon Musk';
+const element = <h1>Hello, {name}</h1>;
+
+ReactDom.render(
+   element,
+   document.getElementById('root');
+);
+```
+
+### JSX are Expressions
+```js
+function getGreeting(user) {
+   if (user) {
+      return <h1>Hello, {formatName(user)}!</h1>;
+   }
+   return <h1>Hello, stranger.</h1>;
+}
+```
+
+### JSX Attributes
+* camelCase
+* class -> className
+* tabindex -> tabIndex
+* aria attributes stay in kebab-case
+```js
+const element = <div tabIndex="0"></div>;
+const element = <img src={user.avatarUrl}></img>;
+```
+* strings in double quotes
+* any other expression in curly braces
+
+### Internal Representation
+```js
+const element = (
+  <h1 className="greeting">
+    Hello, world!
+  </h1>
+);
+```
+
+```js
+const element = React.createElement(
+  'h1',
+  {className: 'greeting'},
+  'Hello, world!'
+);
+```
+
+## React Elements
+* these objects are called React elements
+* an element describes what you want to see on the screen
+* are unlike the DOM cheap to create
+* immutable like a single frame in a movie: UI representation at a certain point in time
+* only way to update the UI is to create a new element and pass it to `ReactDOM.render()`
+
+```js
+function tick() {
+  const element = (
+    <div>
+      <h1>Hello, world!</h1>
+      <h2>It is {new Date().toLocaleTimeString()}.</h2>
+    </div>
+  );
+  ReactDOM.render(element, document.getElementById('root'));}
+
+setInterval(tick, 1000);
+```
+
+### DOM Updates
+* ReactDOM compares the element to the previous one and onlly applies that stuff that changed
+
+## Components
+```js
+function Welcome(props) {
+  return <h1>Hello, {props.name}</h1>;
+}
+```
+
+```js
+class Welcome extends React.Component {
+  render() {
+    return <h1>Hello, {this.props.name}</h1>;
+  }
+}
+```
+
+```js
+const element = <Welcome name="Sara" />;ReactDOM.render(
+  element,
+  document.getElementById('root')
+);
+```
+1. call `ReactDOM.render()` with the component as an element
+2. React calls the component with the props
+3. component returns a React element
+4. React DOM efficiently updates the DOM
+
+* components always start with a capital letter
+* lower case letters are reserved for DOM tags
+
+### Function Components
+* accept a single `props` argument
+* return a React element
+
+### Class Components
+* extend `React.Component`
+* has a `render()` method that returns a React element
+
+### Composing Components
+```js
+function Welcome(props) {
+  return <h1>Hello, {props.name}</h1>;
+}
+
+function App() {
+  return (
+    <div>
+      <Welcome name="Sara" />
+      <Welcome name="Cahal" />
+      <Welcome name="Edite" />
+    </div>
+  );
+}
+
+ReactDOM.render(
+  <App />,
+  document.getElementById('root')
+);
+```
 
 ## Props
+* read only (pure functions)
 
 ## State
+```js
+class Clock extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {date: new Date()};  }
+
+  render() {
+    return (
+      <div>
+        <h1>Hello, world!</h1>
+        <h2>It is {this.state.date.toLocaleTimeString()}.</h2>
+      </div>
+    );
+  }
+}
+```
 
 ## Lifecycle Methods
+### `componentDidMount()`
+* runs after the component output has been rendered to the DOM
+```js
+  componentDidMount() {
+    this.timerID = setInterval(
+      () => this.tick(),
+      1000
+      );
+   }
+```
+
+### `componentWillUnmount()`
+```js
+ componentWillUnmount() {
+    clearInterval(this.timerID);
+ }
+```
+
+* do not modify state directy
+```js
+this.state.comment = 'Hello'; // wrong
+```
+
+```js
+this.setState({comment: 'Hello'});
+```
+* updates are asynchronous (may batch them together)
+* updates are merged
+* data flows down
 
 ## Events
+```js
+function ActionLink() {
+  function handleClick(e) {
+      e.preventDefault();
+      console.log('The link was clicked.');
+   }
+  return (
+    <a href="#" onClick={handleClick}>
+      Click me
+    </a>
+  );
+}
+```
+* don't call the handler
 
 ## Conditional Rendering
+```js
+function Greeting(props) {
+  const isLoggedIn = props.isLoggedIn;
+  if (isLoggedIn) {
+    return <UserGreeting />;
+  }
+  return <GuestGreeting />;
+}
+```
+
+```js
+function Mailbox(props) {
+  const unreadMessages = props.unreadMessages;
+  return (
+    <div>
+      <h1>Hello!</h1>
+      {unreadMessages.length > 0 &&
+         <h2>
+            You have {unreadMessages.length} unread messages.
+         </h2>
+      }
+    </div>
+  );
+}
+```
+
+```js
+render() {
+  const isLoggedIn = this.state.isLoggedIn;
+  return (
+    <div>
+      The user is <b>{isLoggedIn ? 'currently' : 'not'}</b> logged in.    </div>
+  );
+}
+```
+
+### Prevent Component from Rendering
+```js
+function WarningBanner(props) {
+  if (!props.warn) {    return null;  }
+  return (
+    <div className="warning">
+      Warning!
+    </div>
+  );
+}
+```
 
 ## Lists
+```js
+function NumberList(props) {
+  const numbers = props.numbers;
+  const listItems = numbers.map((number) =>
+    <li key={number.toString()}>
+      {number}
+    </li>
+  );
+  return (
+    <ul>{listItems}</ul>
+  );
+}
+```
+* keys help React identify which items have changed, are added, or are removed
+* should uniquely identify a list item
+
+```js
+const todoItems = todos.map((todo, index) =>
+  // Only do this if items have no stable IDs  <li key={index}>    {todo.text}
+  </li>
+);
+```
 
 ## Forms
+### Controlled Components
+* input value is controlled by react
+```js
+class NameForm extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {value: ''};
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handleChange(event) {    this.setState({value: event.target.value});  }
+  handleSubmit(event) {
+    alert('A name was submitted: ' + this.state.value);
+    event.preventDefault();
+  }
+
+  render() {
+    return (
+      <form onSubmit={this.handleSubmit}>
+        <label>
+          Name:
+          <input type="text" value={this.state.value} onChange={this.handleChange} />
+        </label>
+        <input type="submit" value="Submit" />
+      </form>
+    );
+  }
+}
+```
+
+### Multiple Inputs
+```js
+handleInputChange(event) {
+  const target = event.target;
+  const value = target.type === 'checkbox' ? target.checked : target.value;
+  const name = target.name;
+  this.setState({
+    [name]: value
+  });
+}
+```
+
+### Composition vs Inheritance
+* children
+```js
+function SplitPane(props) {
+  return (
+    <div className="SplitPane">
+      <div className="SplitPane-left">
+        {props.left}      </div>
+      <div className="SplitPane-right">
+        {props.right}      </div>
+    </div>
+  );
+}
+
+function App() {
+  return (
+    <SplitPane
+      left={
+        <Contacts />      }
+      right={
+        <Chat />      } />
+  );
+}
+
+
+```
 
 ## Context
 
