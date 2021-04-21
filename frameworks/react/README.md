@@ -1,11 +1,16 @@
 # React
-React is a JavaScript library for building user interfaces.
+React is an open-source JavaScript library for building user interfaces maintained by Facebook.
 
-## Introduction
-* from Facebook
-* Open Source
-
+## Setup
+* direct import (`<script>` + CDN)
+* single pages apps: [Create React App](https://github.com/facebook/create-react-app)
+```bash
 npx create-react-app my-app --template typescript
+```
+* websites (static content): [Gatsby](https://www.gatsbyjs.com/)
+* server side rendering: [Next.js](https://nextjs.org/)
+* Custom Setup (package manager + module bundler + transpiler)
+
 ### Hello World
 ```js
 ReactDOM.render(
@@ -14,7 +19,8 @@ ReactDOM.render(
 );
 ```
 ## JSX
-JSX is a syntax extension to JavaScript to describe what the UI should look like. It produces React elements that will be rendered to the DOM. It is not required in order to use React, but is usually easier to visualize the UI in that way.
+JSX is a syntax extension to JavaScript to describe what the UI should look like.
+It produces React elements that will be rendered to the DOM. It is not required in order to use React, but is usually easier to visualize the UI in that way.
 * can be nested
 * children without content should use the self closing tag
 * input is safe from injection attacks
@@ -43,9 +49,9 @@ function getGreeting(user) {
 
 ### JSX Attributes
 * camelCase
-* class -> className
-* tabindex -> tabIndex
-* for -> htmlFor
+* `class` -> `className`
+* `tabindex` -> `tabIndex`
+* `for` -> `htmlFor`
 * aria attributes stay in kebab-case
 ```js
 const element = <div tabIndex="0"></div>;
@@ -72,11 +78,12 @@ const element = React.createElement(
 ```
 
 ## React Elements
-* these objects are called React elements
+* objects produced by `createElement` are called React elements
 * an element describes what you want to see on the screen
 * are unlike the DOM cheap to create
-* immutable like a single frame in a movie: UI representation at a certain point in time
+* immutable, like a single frame in a movie: UI representation at a certain point in time
 * only way to update the UI is to create a new element and pass it to `ReactDOM.render()`
+* ReactDOM compares the element to the previous one and only applies that stuff that changed
 
 ```js
 function tick() {
@@ -91,21 +98,28 @@ function tick() {
 setInterval(tick, 1000);
 ```
 
-### DOM Updates
-* ReactDOM compares the element to the previous one and onlly applies that stuff that changed
-
 ## Components
-```js
-function Welcome(props) {
-  return <h1>Hello, {props.name}</h1>;
-}
-```
+* components always start with a capital letter
+* lower case letters are reserved for DOM tags
 
+### Class Components
+* extend `React.Component`
+* has a `render()` method that returns a React element
 ```js
 class Welcome extends React.Component {
   render() {
     return <h1>Hello, {this.props.name}</h1>;
   }
+}
+```
+
+### Function Components
+* accept a single `props` argument
+* return a React element
+
+```js
+function Welcome(props) {
+  return <h1>Hello, {props.name}</h1>;
 }
 ```
 
@@ -115,21 +129,12 @@ const element = <Welcome name="Sara" />;ReactDOM.render(
   document.getElementById('root')
 );
 ```
+
+Recap:
 1. call `ReactDOM.render()` with the component as an element
 2. React calls the component with the props
 3. component returns a React element
 4. React DOM efficiently updates the DOM
-
-* components always start with a capital letter
-* lower case letters are reserved for DOM tags
-
-### Function Components
-* accept a single `props` argument
-* return a React element
-
-### Class Components
-* extend `React.Component`
-* has a `render()` method that returns a React element
 
 ### Composing Components
 ```js
@@ -153,8 +158,29 @@ ReactDOM.render(
 );
 ```
 
+### Classes vs Function components
+* they work side by side
+* class components used to have more features
+* since the introduction of hooks in React 16.8, functional components have the same functionality (and even more)
+
+Function components are recommended for new components, because:
+* they provide a more direct API
+* reusability of state logic through custom hooks
+* do not split up use cases into multiple lifecycle methods
+* do not deal with `this` binding
+* more readable
+* easier for computers (classes cause issues in certain build tools)
+
+### Best practices:
+* single component per file
+* rendering should fit on one screen (about 50 LOC)
+* split when it gets too long, too complex, contradicts single responsibility principle, needs to be reused
+* one tag, one line
+
 ## Props
 * read only (pure functions)
+* can (and should) be destructured
+* props: 3 are okay, 5 smelly, 7 a desaster
 
 ```js
 function Welcome(props) {
@@ -198,6 +224,25 @@ class Clock extends React.Component {
 }
 ```
 
+When to decide if data should be state:
+* is it passed from a parent via props? → probably no state
+* does it remain unchanged over time? → probably no state
+* can you compute it based on any other state or props? → probably no state
+* does not render to UI? → probably no state
+
+Using State Correctly:
+* do not modify state directy
+```js
+this.state.comment = 'Hello'; // wrong
+```
+```js
+this.setState({comment: 'Hello'});
+```
+
+* updates are asynchronous (may batch them together)
+* updates are merged
+* data flows down
+
 ## Lifecycle Methods
 ### `componentDidMount()`
 * runs after the component output has been rendered to the DOM
@@ -210,35 +255,26 @@ class Clock extends React.Component {
    }
 ```
 
-### `componentDidUpdate()`
-
-
 ### `componentWillUnmount()`
+* runs before a component unmounts
 ```js
  componentWillUnmount() {
     clearInterval(this.timerID);
  }
 ```
 
-* do not modify state directy
-```js
-this.state.comment = 'Hello'; // wrong
-```
-
-```js
-this.setState({comment: 'Hello'});
-```
-* updates are asynchronous (may batch them together)
-* updates are merged
-* data flows down
+### `componentDidUpdate()`
 
 ## Events
+* [SyntheticEvent](https://reactjs.org/docs/events.html)
+* `onClick`, `onHover`, `onMouseOver` and many more
 ```js
 function ActionLink() {
-  function handleClick(e) {
+  const handleClick = (e) => {
       e.preventDefault();
       console.log('The link was clicked.');
    }
+   
   return (
     <a href="#" onClick={handleClick}>
       Click me
@@ -249,6 +285,7 @@ function ActionLink() {
 * don't call the handler
 
 ## Conditional Rendering
+* control flow statements
 ```js
 function Greeting(props) {
   const isLoggedIn = props.isLoggedIn;
@@ -259,6 +296,7 @@ function Greeting(props) {
 }
 ```
 
+* Conditional Abuse
 ```js
 function Mailbox(props) {
   const unreadMessages = props.unreadMessages;
@@ -275,6 +313,7 @@ function Mailbox(props) {
 }
 ```
 
+* ternary operator
 ```js
 render() {
   const isLoggedIn = this.state.isLoggedIn;
@@ -288,7 +327,10 @@ render() {
 ### Prevent Component from Rendering
 ```js
 function WarningBanner(props) {
-  if (!props.warn) {    return null;  }
+  if (!props.warn) {
+    return null;
+  }
+  
   return (
     <div className="warning">
       Warning!
@@ -324,6 +366,7 @@ const todoItems = todos.map((todo, index) =>
 ## Forms
 ### Controlled Components
 * input value is controlled by react
+* use almost every time
 ```js
 class NameForm extends React.Component {
   constructor(props) {
@@ -346,6 +389,34 @@ class NameForm extends React.Component {
           Name:
           <input type="text" value={this.state.value} onChange={this.handleChange} />
         </label>
+        <input type="submit" value="Submit" />
+      </form>
+    );
+  }
+}
+```
+
+### Uncontrolled Components
+* input values are handled by the DOM
+* use when it is tedious to write all event handlers or when migrating from a non React codebase
+```js
+class NameForm extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.input = React.createRef();  }
+
+  handleSubmit(event) {
+    alert('A name was submitted: ' + this.input.current.value);
+    event.preventDefault();
+  }
+
+  render() {
+    return (
+      <form onSubmit={this.handleSubmit}>
+        <label>
+          Name:
+          <input type="text" ref={this.input} />        </label>
         <input type="submit" value="Submit" />
       </form>
     );
@@ -382,21 +453,14 @@ function SplitPane(props) {
 function App() {
   return (
     <SplitPane
-      left={
-        <Contacts />      }
-      right={
-        <Chat />      } />
+      left={<Contacts />}
+      right={<Chat />}
+    />
   );
 }
-
-
 ```
 
-## Context
-
-## Refs
-
-## Fragements
+## Fragments
 * any functions can only return one React element
 * in order to not overuse divs, React introduced the concept of Fragments
 * are not rendered to the DOM
@@ -422,14 +486,192 @@ function MyList() {
 }
 ```
 
+## Hooks
+### `useState`
+```js
+function Example() {
+  const [count, setCount] = useState(0);
+  
+  return (
+    <div>
+      <p>You clicked {count} times</p>
+      <button onClick={() => setCount(count + 1)}>
+        Click me
+      </button>
+    </div>
+  );
+}
+```
+
+Updating object properties:
+```js
+setPerson({ ...person, message: 'hello world' });
+```
+
+### `useEffect`
+```js
+import React, { useState, useEffect } from 'react';
+
+function Example() {
+  const [count, setCount] = useState(0);
+
+  // Similar to componentDidMount and componentDidUpdate
+	// runs after the first render and after every update
+  useEffect(() => {
+    // Update the document title using the browser API
+    document.title = `You clicked ${count} times`;
+  });
+
+  return (
+    <div>
+      <p>You clicked {count} times</p>
+      <button onClick={() => setCount(count + 1)}>
+        Click me
+      </button>
+    </div>
+  );
+}
+```
+
+```js
+function FriendStatus(props) {
+  const [isOnline, setIsOnline] = useState(null);
+
+  useEffect(() => {
+    function handleStatusChange(status) {
+      setIsOnline(status.isOnline);
+    }
+    ChatAPI.subscribeToFriendStatus(props.friend.id, handleStatusChange);
+    // Specify how to clean up after this effect:
+    return function cleanup() {
+      ChatAPI.unsubscribeFromFriendStatus(props.friend.id, handleStatusChange);
+    };
+  });
+
+  if (isOnline === null) {
+    return 'Loading...';
+  }
+  return isOnline ? 'Online' : 'Offline';
+}
+```
+
+```js
+useEffect(() => {
+  document.title = `You clicked ${count} times`;
+}, [count]); // Only re-run the effect if count changes
+```
+
+### `useCallback`
+* memoized callback
+* only changes when dependencies change
+```js
+const memoizedCallback = useCallback(
+  () => {
+    doSomething(a, b);
+  },
+  [a, b],
+);
+```
+### Other Hooks
+* `useContext`: for the Context API
+* `useReducer`: more sophisticated version of `useState`
+* `useMemo`: for memoized values (similar to `useCallback`)
+* `useRef`: creating references
+
+### Custom Hooks
+* `useLocalStorage`
+```js
+import { useState } from 'react';
+
+function useLocalStorage(key, initialValue) {
+	const [storedValue, setStoredValue] = useState(() => {
+		try {
+			const item = window.localStorage.getItem(key);
+			return item ? JSON.parse(item) : initialValue;
+		} catch (error) {
+			console.error(error);
+			return initialValue;
+		}
+	});
+
+	const setValue = value => {
+		try {
+			const valueToStore = value instanceof Function ? value(storedValue) : value;
+			setStoredValue(valueToStore);
+			window.localStorage.setItem(key, JSON.stringify(valueToStore));
+		} catch (error) {
+			console.error(error);
+		}
+	};
+
+	return [storedValue, setValue];
+}
+
+export default useLocalStorage;
+```
+
 ## Higher Order Components
 
+## Context
+Context provides a way to pass data through the component tree without having to pass props down manually at every level.
+
+When to use Context:
+* for data that is considered "global" for a tree of React components
+* when some data needs to be accessible by many components at different nesting levels
+
+```js
+import React, { useContext, useState } from 'react';
+import PropTypes from 'prop-types';
+
+const AccountContext = React.createContext();
+const AccountUpdateContext = React.createContext();
+
+export function useAccount() {
+  return useContext(AccountContext);
+}
+
+export function useAccountUpdate() {
+  return useContext(AccountUpdateContext);
+}
+
+export function AccountProvider({ children }) {
+  const [account, setAccount] = useState(null);
+  
+  const updateAccount = newAccount => {
+    setAccount(newAccount);
+  };
+  
+  return (
+    <AccountContext.Provider value={account}>
+      <AccountUpdateContext.Provider value={updateAccount}>
+        { children }
+      </AccountUpdateContext.Provider>
+    </AccountContext.Provider>
+  );
+}
+
+AccountProvider.propTypes = {
+  children: PropTypes.object
+}
+```
+* consumed with `<AccountContext.Consumer>`
+
 ## React <> TypeScript
+* types vs interfaces
+* enums (alternatives)
 
 ## React Testing
 * describe: test suite (for one component)
 * it or test: single test (and single expect)
 * snapshot testing allows you to see how your component changed since the last test
+
+* one expect per test
+* write descriptive test names
+* do not test implementation details
+
+* mocking components???
+* stylinig testing???
+* additional libraries???
 
 ```js
 import {render, fireEvent, cleanup} from '@testing-library/react';
@@ -462,9 +704,70 @@ it('button click changes props', () => {
 ```
 * /Initial/i: get first node that has the text "Initial"
 
-## Hooks
-
 ## API Calls
+* axios:
+```js
+useEffect(() => {
+        const fetchUsers = async () => {
+            try {
+                setData({users: data.users, isFetching: true});
+                const response = await axios.get(USER_SERVICE_URL);
+                setData({users: response.data, isFetching: false});
+            } catch (e) {
+                console.log(e);
+                setData({users: data.users, isFetching: false});
+            }
+        };
+        fetchUsers();
+    }, []);
+```
+
+* fetch:
+```js
+const [users, setUsers] = useState([]);
+const [isLoading, setIsLoading] = useState(true);
+
+const fetchUsers = async () => {
+	const response = await fetch(url);
+	// handle erros with response.status
+	const users = await response.json();
+	setUsers(users);
+	setIsLoading(false);
+};
+
+useEffect(() => {
+	fetchUsers();
+}, []);
+```
+
+## React Router
+```js
+const App = () => {
+	return (
+		<Router exact path="/">
+			<Home/>
+		</Router>
+		<Router path="/about">
+			<About/>
+		</Router>
+		<Router path="/books/:id">
+			<Book/>
+		</Router>
+		<Router path="*">
+			<Error/>
+		</Router>
+	);
+};
+```
+Getting a template parameter:
+```js
+const { id } = useParams();
+```
+
+Links:
+```js
+<Link to="/about">About</Link>
+```
 
 ## Designing a React Application
 1. Design UI
@@ -474,23 +777,15 @@ it('button click changes props', () => {
     * only render() methods
     * the root component takes the data model as a prop
 1. Identify the minimal (but complete) representation of UI state
-    * is it passed from a parent via props? → probably no state
-    * does it remain unchanged over time? → probably no state
-    * can you compute it based on any other state or props? → probably no state
-    * does not render to UI? → probably no state
 1. Identify where your state should live
     * find a common owner component that is a parent of all components that render something from that state
     * create one if you can't find one
 1. Add inverse data flow (by passing callbacks)
 
-## Styleguide
-* destructure props
-* one tag, one line
-* props: 3 are okay, 5 smelly, 7 a desaster
-* line length: should be less than 80, definitely not more than 120 characters
-* only one component per file
 
-### Naming
+## File Structure
+
+## Naming
 * components in PascalCase (nouns)
 * props, variables and functions in camelCase
 * functions that return JSX should start with "render"
