@@ -610,8 +610,6 @@ function useLocalStorage(key, initialValue) {
 export default useLocalStorage;
 ```
 
-## Higher Order Components
-
 ## Context
 Context provides a way to pass data through the component tree without having to pass props down manually at every level.
 
@@ -657,8 +655,32 @@ AccountProvider.propTypes = {
 * consumed with `<AccountContext.Consumer>`
 
 ## React <> TypeScript
-* types vs interfaces
+* types vs interface?
+	* does not really matter (but should be consistent)
+	* [Details](https://github.com/typescript-cheatsheets/react#types-or-interfaces)	 
 * enums (alternatives)
+* return type: `JSX.Element`
+
+```ts
+const [user, setUser] = React.useState<IUser | null>(null);
+```
+
+* prop type examples
+```ts
+export declare interface AppProps {
+  children1: JSX.Element; // bad, doesnt account for arrays
+  children2: JSX.Element | JSX.Element[]; // meh, doesn't accept strings
+  children3: React.ReactChildren; // despite the name, not at all an appropriate type; it is a utility
+  children4: React.ReactChild[]; // better, accepts array children
+  children: React.ReactNode; // best, accepts everything (see edge case below)
+  functionChildren: (name: string) => React.ReactNode; // recommended function as a child render prop type
+  style?: React.CSSProperties; // to pass through style props
+  onChange?: React.FormEventHandler<HTMLInputElement>; // form events! the generic parameter is the type of event.target
+  //  more info: https://react-typescript-cheatsheet.netlify.app/docs/advanced/patterns_by_usecase/#wrappingmirroring
+  props: Props & React.ComponentPropsWithoutRef<"button">; // to impersonate all the props of a button element and explicitly not forwarding its ref
+  props2: Props & React.ComponentPropsWithRef<MyButtonWithForwardRef>; // to impersonate all the props of MyButtonForwardedRef and explicitly forwarding its ref
+}
+```
 
 ## React Testing
 * describe: test suite (for one component)
@@ -681,11 +703,7 @@ afterEach(cleanup)
 
 it('Text in state is changed when button clicked', () => {
     const { getByText } = render(<TestHook />);
-
-    expect(getByText(/Initial/i).textContent).toBe("Initial State")
-
     fireEvent.click(getByText("State Change Button"))
-
     expect(getByText(/Initial/i).textContent).toBe("Initial State Changed")
  })
 
@@ -695,10 +713,7 @@ it('button click changes props', () => {
                                 <TestHook />
                                </App>)
 
-  expect(getByText(/Moe/i).textContent).toBe("Moe")
-
   fireEvent.click(getByText("Change Name"))
-
   expect(getByText(/Steve/i).textContent).toBe("Steve")
 })
 ```
