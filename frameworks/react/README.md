@@ -2,6 +2,10 @@
 React is a JavaScript library for building user interfaces.
 
 ## Introduction
+* from Facebook
+* Open Source
+
+npx create-react-app my-app --template typescript
 ### Hello World
 ```js
 ReactDOM.render(
@@ -41,6 +45,7 @@ function getGreeting(user) {
 * camelCase
 * class -> className
 * tabindex -> tabIndex
+* for -> htmlFor
 * aria attributes stay in kebab-case
 ```js
 const element = <div tabIndex="0"></div>;
@@ -151,12 +156,36 @@ ReactDOM.render(
 ## Props
 * read only (pure functions)
 
+```js
+function Welcome(props) {
+  return(
+    <h1>Welcome {props.name}</h1>
+  );
+}
+```
+
+```js
+class Welcome extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  
+  render() {
+    return(
+      <h1>Welcome{this.props.name}</h1>
+    );
+  }
+}
+```
+
 ## State
+* component rerenders when state changes
 ```js
 class Clock extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {date: new Date()};  }
+    this.state = {date: new Date()};
+  }
 
   render() {
     return (
@@ -180,6 +209,9 @@ class Clock extends React.Component {
       );
    }
 ```
+
+### `componentDidUpdate()`
+
 
 ### `componentWillUnmount()`
 ```js
@@ -365,12 +397,70 @@ function App() {
 ## Refs
 
 ## Fragements
+* any functions can only return one React element
+* in order to not overuse divs, React introduced the concept of Fragments
+* are not rendered to the DOM
+```js
+function MyList() {
+  return(
+    <React.Fragment>
+      <Welcome name="Hugo"/>
+      <Welcomename="Fritz"/>
+      <Welcomename="Franz"/>
+    </React.Fragment>
+  );
+}
+
+function MyList() {
+  return(
+    <>
+      <Welcome name="Hugo"/>
+      <Welcomename="Fritz"/>
+      <Welcomename="Franz"/>
+    </>
+  );
+}
+```
 
 ## Higher Order Components
 
 ## React <> TypeScript
 
 ## React Testing
+* describe: test suite (for one component)
+* it or test: single test (and single expect)
+* snapshot testing allows you to see how your component changed since the last test
+
+```js
+import {render, fireEvent, cleanup} from '@testing-library/react';
+import App from '../../../App'
+
+afterEach(cleanup)
+
+it('Text in state is changed when button clicked', () => {
+    const { getByText } = render(<TestHook />);
+
+    expect(getByText(/Initial/i).textContent).toBe("Initial State")
+
+    fireEvent.click(getByText("State Change Button"))
+
+    expect(getByText(/Initial/i).textContent).toBe("Initial State Changed")
+ })
+
+
+it('button click changes props', () => {
+  const { getByText } = render(<App>
+                                <TestHook />
+                               </App>)
+
+  expect(getByText(/Moe/i).textContent).toBe("Moe")
+
+  fireEvent.click(getByText("Change Name"))
+
+  expect(getByText(/Steve/i).textContent).toBe("Steve")
+})
+```
+* /Initial/i: get first node that has the text "Initial"
 
 ## Hooks
 
