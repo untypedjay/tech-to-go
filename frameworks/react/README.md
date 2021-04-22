@@ -3,7 +3,7 @@ React is an open-source JavaScript library for building user interfaces maintain
 
 ## Setup
 * direct import (`<script>` + CDN)
-* single pages apps: [Create React App](https://github.com/facebook/create-react-app)
+* single page apps: [Create React App](https://github.com/facebook/create-react-app)
 ```bash
 npx create-react-app my-app --template typescript
 ```
@@ -26,7 +26,7 @@ It produces React elements that will be rendered to the DOM. It is not required 
 * input is safe from injection attacks
 
 ### Embedded Expressions
-* any valid JavaScript expression can be put between curly brances in JSX
+* any valid JavaScript expression can be put between curly braces in JSX
 ```js
 const name = 'Elon Musk';
 const element = <h1>Hello, {name}</h1>;
@@ -319,7 +319,8 @@ render() {
   const isLoggedIn = this.state.isLoggedIn;
   return (
     <div>
-      The user is <b>{isLoggedIn ? 'currently' : 'not'}</b> logged in.    </div>
+      The user is <b>{isLoggedIn ? 'currently' : 'not'}</b> logged in.
+    </div>
   );
 }
 ```
@@ -358,7 +359,9 @@ function NumberList(props) {
 
 ```js
 const todoItems = todos.map((todo, index) =>
-  // Only do this if items have no stable IDs  <li key={index}>    {todo.text}
+  // Only do this if items have no stable IDs
+  <li key={index}>
+    {todo.text}
   </li>
 );
 ```
@@ -376,7 +379,10 @@ class NameForm extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleChange(event) {    this.setState({value: event.target.value});  }
+  handleChange(event) {
+    this.setState({value: event.target.value});
+  }
+  
   handleSubmit(event) {
     alert('A name was submitted: ' + this.state.value);
     event.preventDefault();
@@ -416,7 +422,8 @@ class NameForm extends React.Component {
       <form onSubmit={this.handleSubmit}>
         <label>
           Name:
-          <input type="text" ref={this.input} />        </label>
+          <input type="text" ref={this.input} />
+	</label>
         <input type="submit" value="Submit" />
       </form>
     );
@@ -437,15 +444,17 @@ handleInputChange(event) {
 ```
 
 ### Composition vs Inheritance
-* children
+* `children` props
 ```js
 function SplitPane(props) {
   return (
     <div className="SplitPane">
       <div className="SplitPane-left">
-        {props.left}      </div>
+        {props.left}
+      </div>
       <div className="SplitPane-right">
-        {props.right}      </div>
+        {props.right}
+      </div>
     </div>
   );
 }
@@ -515,10 +524,7 @@ import React, { useState, useEffect } from 'react';
 function Example() {
   const [count, setCount] = useState(0);
 
-  // Similar to componentDidMount and componentDidUpdate
-	// runs after the first render and after every update
   useEffect(() => {
-    // Update the document title using the browser API
     document.title = `You clicked ${count} times`;
   });
 
@@ -542,7 +548,6 @@ function FriendStatus(props) {
       setIsOnline(status.isOnline);
     }
     ChatAPI.subscribeToFriendStatus(props.friend.id, handleStatusChange);
-    // Specify how to clean up after this effect:
     return function cleanup() {
       ChatAPI.unsubscribeFromFriendStatus(props.friend.id, handleStatusChange);
     };
@@ -558,7 +563,7 @@ function FriendStatus(props) {
 ```js
 useEffect(() => {
   document.title = `You clicked ${count} times`;
-}, [count]); // Only re-run the effect if count changes
+}, [count]);
 ```
 
 ### `useCallback`
@@ -683,9 +688,16 @@ export declare interface AppProps {
 ```
 
 ## React Testing
-* describe: test suite (for one component)
-* it or test: single test (and single expect)
+* `describe`: test suite (for one component)
+* `it` or `test`: single test (and single expect)
 * snapshot testing allows you to see how your component changed since the last test
+
+```js
+it('matches snapshot', () => {
+    const { asFragment } = render(<Trends trends={mockTrends}/>);
+    expect(asFragment()).toMatchSnapshot();
+});
+```
 
 * one `expect` per test
 * write descriptive test names
