@@ -687,13 +687,12 @@ export declare interface AppProps {
 * it or test: single test (and single expect)
 * snapshot testing allows you to see how your component changed since the last test
 
-* one expect per test
+* one `expect` per test
 * write descriptive test names
 * do not test implementation details
 
 * mocking components???
-* stylinig testing???
-* additional libraries???
+* Enzyme
 
 ```js
 import {render, fireEvent, cleanup} from '@testing-library/react';
@@ -718,6 +717,21 @@ it('button click changes props', () => {
 })
 ```
 * /Initial/i: get first node that has the text "Initial"
+
+### Testing CSS
+```js
+import React from 'react'import 'jest-dom/extend-expect'
+import { render, cleanup } from 'react-testing-library'import MyHeader from './MyHeader'afterEach(cleanup)test('It has to contain My Header', () => {
+  render(
+    <div>
+      <MyHeader />
+    </div>
+  )  const headerClass = MyHeader().type.styledComponentId
+  const MyHeaderRoots = document.getElementsByClassName(headerClass)
+  const style = window.getComputedStyle(MyHeaderRoots[0])  expect(style.position).toBe('fixed')
+  expect(style.top).toBe('0px')
+})
+```
 
 ## API Calls
 * axios:
