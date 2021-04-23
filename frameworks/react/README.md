@@ -663,7 +663,6 @@ AccountProvider.propTypes = {
 * types vs interface?
 	* does not really matter (but should be consistent)
 	* [Details](https://github.com/typescript-cheatsheets/react#types-or-interfaces)	 
-* enums (alternatives)
 * return type: `JSX.Element`
 
 ```ts
@@ -702,8 +701,6 @@ it('matches snapshot', () => {
 * one `expect` per test
 * write descriptive test names
 * do not test implementation details
-
-* mocking components???
 * Enzyme
 
 ```js
@@ -822,9 +819,6 @@ Links:
     * find a common owner component that is a parent of all components that render something from that state
     * create one if you can't find one
 1. Add inverse data flow (by passing callbacks)
-
-
-## File Structure
 
 ## Naming
 * components in PascalCase (nouns)
