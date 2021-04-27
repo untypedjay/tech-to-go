@@ -17,6 +17,9 @@ A knowledge base of selected technologies.
 * [<img src="https://img.shields.io/badge/Java-D10203"/>](./languages/java/)
 * [<img src="https://img.shields.io/badge/JavaScript-F7E116"/>](./languages/js/)
 
+### 📃 Protocols
+* [<img src="https://img.shields.io/badge/HTTP-015B9D"/>](./protocols/http/)
+
 ### 🛠️ Tools
 * [<img src="https://img.shields.io/badge/Git-F05030"/>](./tools/git.md)
 * [<img src="https://img.shields.io/badge/Maven-FB6605"/>](./tools/maven.md)
