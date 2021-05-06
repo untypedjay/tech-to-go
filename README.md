@@ -13,6 +13,7 @@ A knowledge base of selected technologies.
 * [<img src="https://img.shields.io/badge/Computer%20Memory-219081"/>](./hardware/memory.md)
 
 ### 💬 Languages
+* [<img src="https://img.shields.io/badge/CSS-1472B6"/>](./languages/css/)
 * [<img src="https://img.shields.io/badge/HTML-E44C27"/>](./languages/html/)
 * [<img src="https://img.shields.io/badge/Java-D10203"/>](./languages/java/)
 * [<img src="https://img.shields.io/badge/JavaScript-F7E116"/>](./languages/js/)
