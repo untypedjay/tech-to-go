@@ -96,3 +96,31 @@ function (a, b){
 // arrow function
 (a, b) => a + b + 100;
 ```
+
+## Destructuring Assignments
+The destructuring assignment syntax is a JavaScript expression that makes it possible to unpack values from arrays, or properties from objects, into distinct variables.
+### Array Destructuring
+```js
+let arr = ["John", "Smith"]
+
+let [firstName, surname] = arr;
+
+alert(firstName); // John
+alert(surname);  // Smith
+```
+
+### Object Destructuring
+```js
+let options = {
+  title: "Menu",
+  width: 100,
+  height: 200
+};
+
+let {title, width, height} = options;
+
+alert(title);  // Menu
+alert(width);  // 100
+alert(height); // 200
+```
+
