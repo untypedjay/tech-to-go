@@ -81,3 +81,18 @@ const withShorthandProperties: {
   timestamp: Date.now()
 }
 ```
+
+## Arrow Functions
+Arrow functions are a more concise alternative to function expressions, but there are slight differences.
+The main difference is, that arrow functions don't have their own scope, so the bindings of `this` and `super` cannot be used.
+Therefore, arrow functions should not be used as methods.
+
+```js
+// traditional anonymous function
+function (a, b){
+  return a + b + 100;
+}
+
+// arrow function
+(a, b) => a + b + 100;
+```
