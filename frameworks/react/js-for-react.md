@@ -124,3 +124,16 @@ alert(width);  // 100
 alert(height); // 200
 ```
 
+## Default Parameters
+Parameters are what you specify in the function declaration whereas the arguments are what you pass to the function.
+A parameter as a default value of `undefined` if there is no argument passed to the function.
+But the default parameter can also be custom:
+```js
+function say(message='Hi') {
+    console.log(message);
+}
+
+say(); // 'Hi'
+say(undefined); // 'Hi'
+say('Hello'); // 'Hello'
+```
