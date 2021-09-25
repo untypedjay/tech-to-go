@@ -44,3 +44,20 @@ function createGame(gameName) {
 const hockeyGame = createGame('Hockey');
 const soccerGame = createGame('Soccer');
 ```
+
+## Template Literals
+A template literal is created when defining a string using backticks:
+```js
+const templateLiteral = `I am a template literal`.
+```
+
+If you want to use a backtick inside a template literal, you can easily escape it using a backslash before.
+Template literals have the ability to span across multiple lines.
+
+Any expression (something that results in a value) can be interplolated in template literals like this:
+```js
+let firstName = 'John',
+    lastName = 'Doe';
+
+let greeting = `Hi ${firstName}, ${lastName}`;
+```
