@@ -61,3 +61,23 @@ let firstName = 'John',
 
 let greeting = `Hi ${firstName}, ${lastName}`;
 ```
+
+## Shorthand Properties
+Whenever a variable has the same name as the property on an object, the property name can be omitted:
+
+```js
+//
+const withoutShorthandProperties: {
+  name: name,
+  id: id,
+  avatar: avatar,
+  timestamp: Date.now()
+}
+
+const withShorthandProperties: {
+  name,
+  id,
+  avatar,
+  timestamp: Date.now()
+}
+```
