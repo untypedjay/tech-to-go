@@ -137,3 +137,32 @@ say(); // 'Hi'
 say(undefined); // 'Hi'
 say('Hello'); // 'Hello'
 ```
+
+## Rest/Spread
+The rest syntax puts the rest of some user-supplied values into an array. The spread syntax expands iterables (such as arrays and objects) into individual elements.
+
+Rest example:
+```js
+function myBio(firstName, lastName, ...otherInfo) { 
+  return otherInfo;
+}
+
+myBio("Oluwatobi", "Sofela", "CodeSweetly", "Web Developer", "Male"); // ["CodeSweetly", "Web Developer", "Male"]
+```
+
+Spread examples:
+```js
+function sum(x, y, z) {
+  return x + y + z;
+}
+
+const numbers = [1, 2, 3];
+
+console.log(sum(...numbers));
+```
+
+```js
+let numberStore = [0, 1, 2];
+let newNumber = 12;
+numberStore = [...numberStore, newNumber];
+```
