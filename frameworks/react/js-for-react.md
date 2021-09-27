@@ -166,3 +166,26 @@ let numberStore = [0, 1, 2];
 let newNumber = 12;
 numberStore = [...numberStore, newNumber];
 ```
+
+## ES Modules
+```js
+// default import
+import toUpperCase from './uppercase.js'
+
+// default import from different domain
+import toUpperCase from 'https://flavio-es-modules-example.glitch.me/uppercase.js'
+
+// named import
+import { toUpperCase } from '/uppercase.js'
+
+// named export
+export { a, b, c }
+
+// import all epxorts
+import * from 'module'
+
+// rename imports
+import { a, b as two } from 'module'
+
+
+```
