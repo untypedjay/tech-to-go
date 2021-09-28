@@ -250,3 +250,7 @@ It behaves like the `.` chaining operator. But instead of causing an error if a 
 ```js
 const dogName = adventurer.dog?.name;
 ```
+
+## Promises and Async/Await
+JavaScript executes code in a single thread, which makes it blocking. Functions that do not return a result right away may return a promise, which can be handled later.
+If everything goes well, the promise resolves. If something goes wrong, the promise gets rejected.
