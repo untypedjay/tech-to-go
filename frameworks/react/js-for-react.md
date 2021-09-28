@@ -186,6 +186,11 @@ import * from 'module'
 
 // rename imports
 import { a, b as two } from 'module'
-
-
 ```
+
+## Terneries
+The conditional (ternary) operator is the only operator in JavaScript that takes three operands: a condition followed by a question mark (`?`), then an expression that will be executed if the condition is truthy, followed by a colon (`:`) and the expression that will be executed if the condition is falsy.
+
+```js
+const beverage = (age >= 21) ? "Beer" : "Juice";
+``
