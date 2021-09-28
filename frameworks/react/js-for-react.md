@@ -244,3 +244,9 @@ It returns the first argument if it's not `null` or `undefined`. Otherwise the s
 const foo = null ?? 'default string'; // -> "default string"
 const baz = 0 ?? 42; // -> 0
 ```
+
+## Optional Chaining
+It behaves like the `.` chaining operator. But instead of causing an error if a reference is nullish (`null` or `undefined`), it returns `undefined`.
+```js
+const dogName = adventurer.dog?.name;
+```
