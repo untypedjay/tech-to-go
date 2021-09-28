@@ -193,4 +193,47 @@ The conditional (ternary) operator is the only operator in JavaScript that takes
 
 ```js
 const beverage = (age >= 21) ? "Beer" : "Juice";
-``
+```
+
+## Array Methods
+### `find`
+It returns the value of the first element in the provided array that satifies the provided testing function. If no value satisfies the testing function, `undefined` will be returned.
+```js
+const foundElement = array1.find(element => element > 10);
+```
+
+### `some`
+It returns true if there is an element in the array for that the provided function returns true, otherwise false.
+```js
+const isSomethingEven = array2.some(element => element % 2 === 0);
+```
+
+### `every`
+It returns true if all elements pass the test implemented by the provided function.
+```js
+const isAllBelowThreshold = array3.every(element => element < 40);
+```
+
+### `includes`
+It returns true if a certain value is part of the array.
+```js
+const includesCat = array4.includes('cat');
+```
+
+### `map`
+It creates a new array with the results of the provided function being executed on every element.
+```js
+const multipliedByTwo = array5.map(element => element * 2);
+```
+
+### `filter`
+It creates a new array with all elements that pass the provided test function.
+```js
+const longWords = array6.filter(element => element.length > 6);
+```
+
+### `reduce`
+It passes the return value from the applied function from each element to the next one and returns the final result.
+```js
+const sum = array7.reduce((previousElement, currentElement) => previousElement + currentElement);
+```
