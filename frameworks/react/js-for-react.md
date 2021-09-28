@@ -237,3 +237,10 @@ It passes the return value from the applied function from each element to the ne
 ```js
 const sum = array7.reduce((previousElement, currentElement) => previousElement + currentElement);
 ```
+
+## Nullish Coalescing Operator
+It returns the first argument if it's not `null` or `undefined`. Otherwise the second one.
+```js
+const foo = null ?? 'default string'; // -> "default string"
+const baz = 0 ?? 42; // -> 0
+```
